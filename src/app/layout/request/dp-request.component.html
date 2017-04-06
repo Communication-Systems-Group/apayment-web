@@ -1,0 +1,38 @@
+<app-page-header [heading]="'Requests'" [icon]="'fa-edit'"></app-page-header>
+
+<p>
+    <button type="button" class="btn btn-primary" (click)="addRequest()">New Request</button>
+</p>
+
+<div class="card mb-3" *ngIf="addingDpRequest">
+    <div class="card-header">New Request</div>
+    <div class="card-block table-responsive">
+        <app-dprequest-detail (close)="close($event)"></app-dprequest-detail>
+    </div>
+</div>
+
+
+<div class="card mb-3">
+    <div class="card-header">Striped Rows</div>
+    <div class="card-block table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let contribution of contributions" >
+                <td (click)="onSelect(contribution)">{{contribution.id}}</td>
+                <td>{{contribution.name}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+[1] sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+[2] sudo apt-get update
+[3] sudo apt-get install skype && sudo apt-get install
