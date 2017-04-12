@@ -1,26 +1,28 @@
+
 <div class="login-page">
+    {{model | json }}
     <div class="row">
         <div class="col-md-4 push-md-4">
             <img class="user-avatar" src="assets/images/logo.png" width="150px" />
-            <h1>SB Admin BS 4 Angular2</h1>
-            <form role="form">
-                <div class="form-content">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-underline input-lg" id="" placeholder="Full Name">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control input-underline input-lg" id="" placeholder="Email">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" id="" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" id="" placeholder="Repeat Password">
-                    </div>
+            <h1>Register</h1>
+            <form name="form" (ngSubmit)="register()" #f="ngForm" novalidate>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                    <input type="text" class="form-control input-underline input-lg" name="firstname" placeholder="Firstname" [(ngModel)]="model.firstname" #firstName="ngModel" required />
+                    <div *ngIf="f.submitted && !firstname.valid" class="help-block">First Name is required</div>
                 </div>
-                <a class="btn rounded-btn" [routerLink]="['/dashboard']"> Register </a>&nbsp;
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                    <input type="text" class="form-control input-underline input-lg" name="lastname" placeholder="Lastname" [(ngModel)]="model.firstname" #lastName="ngModel" required />
+                    <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last Name is required</div>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                    <input type="text" class="form-control input-underline input-lg" name="username" placeholder="Username" [(ngModel)]="model.username" #username="ngModel" required />
+                    <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+                </div>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                    <input type="password" class="form-control input-underline input-lg" name="password" placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required />
+                    <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                </div>
+                <button type="submit" class="btn rounded-btn" [disabled]="!f.form.valid">Register</button>
                 <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
             </form>
         </div>

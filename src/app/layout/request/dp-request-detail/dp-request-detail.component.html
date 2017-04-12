@@ -12,6 +12,55 @@
         <label>name: </label>
         <input [(ngModel)]="dpRequest.name" placeholder="name" />
     </div>
+
+    <fieldset class="form-group yes-no">
+        <label class="title">&nbsp;</label>
+        <label class="radio-inline item">
+            Yes
+        </label>
+        <label class="radio-inline">
+            No
+        </label>
+    </fieldset>
+    <fieldset class="form-group yes-no" *ngFor="let contribution of contributions">
+        <label class="title">{{contribution.name}}</label>
+        <label class="radio-inline item">
+            <input type="radio"
+                   name="contribution{{contribution.id}}"
+                   id="optionsRadiosInline1"
+                   value="option1"
+                    (change)="onContributionSelectionChange(contribution.id,'add')">
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="contribution{{contribution.id}}"  id="optionsRadiosInline2" value="option2" checked=""
+                   (change)="onContributionSelectionChange(contribution.id,'remove')">
+        </label>
+    </fieldset>
+
+
     <button (click)="goBack()">Back</button>
     <button (click)="save()">Save</button>
 </div>
+
+
+<div class="radio">
+    <label>
+        <input type="radio"
+               value="1"
+               [checked]="model.ForeignCompany.ProfitCode === 1"
+               id="point1"
+               (change)="onProfitSelectionChange(1)"
+               name="ProfitCode"><small>description</small>
+    </label>
+</div>
+<div class="radio">
+    <label>
+        <input type="radio"
+               value="2"
+               [checked]="model.ForeignCompany.ProfitCode === 2"
+               id="point2"
+               (change)="onProfitSelectionChange(2)"
+               name="ProfitCode"><small>description</small>
+    </label>
+</div>
+

@@ -1,10 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {AuthGuard} from './guards/auth.guards';
+import {GlobalErrorHandler} from './shared/services/global-error-handler';
 
 
 @NgModule({
@@ -17,7 +19,10 @@ import {AppComponent} from './app.component';
         HttpModule,
         AppRoutingModule
     ],
-    providers: [],
+    providers: [AuthGuard, {
+        provide: ErrorHandler,
+        useClass: GlobalErrorHandler
+    }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

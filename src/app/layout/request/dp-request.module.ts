@@ -7,6 +7,7 @@ import {DPRequestComponent} from './dp-request.component';
 import {DPRequestDetailComponent} from './dp-request-detail/dp-request-detail.component';
 import {DPRequestService} from '../../shared/services/dp-request.service';
 import {FormsModule} from '@angular/forms';
+import {ContributionService} from '../../shared/services/contribution.service';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import {FormsModule} from '@angular/forms';
         PageHeaderModule,
         FormsModule
     ],
-    providers: [DPRequestService],
+    providers: [DPRequestService, ContributionService],
     declarations: [DPRequestComponent, DPRequestDetailComponent]
 })
 export class DPRequestModul { }

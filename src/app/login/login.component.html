@@ -1,19 +1,33 @@
 <div class="login-page">
     <div class="row">
         <div class="col-md-4 push-md-4">
-            <img src="assets/images/logo.png" width="150px" class="user-avatar" />
-            <h1>SB Admin BS 4 Angular2</h1>
-            <form role="form">
+            <img src="assets/images/logo.png" width="150px" class="user-avatar"/>
+            <h1>Login</h1>
+
+            <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
                 <div class="form-content">
-                    <div class="form-group">
-                        <input type="text" ng-model="name" class="form-control input-underline input-lg" id="" placeholder="Email">
+                    <div class="form-group"
+                         [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                        <input type="text" class="form-control input-underline input-lg"
+                               name="username" placeholder="Username" [(ngModel)]="model.username"
+                               #username="ngModel" required/>
+                        <div *ngIf="f.submitted && !username.valid" class="help-block">Username is
+                            required
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" id="" placeholder="Password">
+                    <div class="form-group"
+                         [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                        <input type="text" class="form-control input-underline input-lg"
+                               name="password" placeholder="Password" [(ngModel)]="model.password"
+                               #password="ngModel" required/>
+                        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is
+                            required
+                        </div>
                     </div>
+
                 </div>
-                <a class="btn rounded-btn" [routerLink]="['/dashboard']"> Log in </a>
+                <button type="submit" class="btn rounded-btn" [disabled]="!f.form.valid">Login</button>
                 &nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
             </form>

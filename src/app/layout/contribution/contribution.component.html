@@ -1,21 +1,19 @@
 <app-page-header [heading]="'Contributions'" [icon]="'fa-edit'"></app-page-header>
-
-contributions
-\
 <div class="card mb-3">
-    <div class="card-header">Striped Rows</div>
     <div class="card-block table-responsive">
         <table class="table table-hover table-striped">
             <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Code</th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let contribution of contributions" >
                 <td (click)="onSelect(contribution)">{{contribution.id}}</td>
                 <td>{{contribution.name}}</td>
+                <td>{{contribution.code}}</td>
             </tr>
             </tbody>
         </table>
