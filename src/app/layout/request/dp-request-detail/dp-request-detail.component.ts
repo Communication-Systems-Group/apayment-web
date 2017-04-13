@@ -17,7 +17,6 @@ export class DPRequestDetailComponent implements OnInit {
     error: any;
     navigated = false; // true if navigated here
 
-    model: any = {};
 
     contributions: Contribution[];
 
@@ -32,9 +31,9 @@ export class DPRequestDetailComponent implements OnInit {
                 const id = +params['id'];
                 this.navigated = true;
 
-                this.dpRequestService.getDPRequest(id).subscribe(
-                    dpRequest => this.dpRequest = dpRequest
-                );
+                // this.dpRequestService.getDPRequest(id).subscribe(
+                //     dpRequest => this.dpRequest = dpRequest
+                // );
             } else {
                 this.navigated = false;
                 this.dpRequest = new DPRequest();
@@ -43,18 +42,27 @@ export class DPRequestDetailComponent implements OnInit {
             }
         });
         this.getContributions();
-
-        this.model.ForeignCompany = {};
-        this.model.ForeignCompany = {};
     }
 
-    onProfitSelectionChange(entry): void {
-        this.model.ForeignCompany.ProfitCode = entry;
-    }
 
     onContributionSelectionChange(contributionId: number, action: string = 'add') {
-        console.log(action, contributionId);
+        if (action === 'add') {
+            this.contributionService.getContribution(contributionId).subscribe(
+                contribution => {
+                    // TODO: make sure inspectionCriteria does not include contribution
+                    contribution.inspectionCriteria = [];
+                    this.dpRequest.contributions.push(contribution);
+                },
+                error => {
+                    console.error(error);
+                }
+            );
+        } else {
+            const index = this.dpRequest.contributions.findIndex(contribution => contribution.id === contributionId);
+            this.dpRequest.contributions.splice(index, 1);
+        }
     }
+
 
     getContributions() {
         this.contributionService.getContributions().subscribe(
@@ -65,11 +73,11 @@ export class DPRequestDetailComponent implements OnInit {
     }
 
     save(): void {
-
         this.dpRequestService
-        .save(this.dpRequest)
-        .subscribe(dpRequest => {
-                this.dpRequest = dpRequest; // saved hero, w/ id if new
+        .create(this.dpRequest)
+        .subscribe(
+            dpRequest => {
+                this.dpRequest = dpRequest; //
                 this.goBack(dpRequest);
             },
             error => this.error = error // TODO: Display error message

@@ -1,5 +1,5 @@
 import {InspectionCriterion} from './inspection-criterion';
-export class Contribution {
+export interface Contribution {
     id: number;
     name: string;
     code: number;
