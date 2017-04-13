@@ -10,6 +10,7 @@ import {AuthenticationService} from '../shared/services/authentication.service';
 export class LoginComponent implements OnInit {
     model: any = {};
     returnURL: string;
+    errMsg: string;
 
     constructor(private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) {
     }
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate([this.returnURL]);
             },
             error => {
+                this.errMsg = 'Username and password do not match.';
                 // TODO: Handle error
                 console.log('Error login: ' + error.toString());
             }

@@ -5,7 +5,13 @@
 </p>
 
 <div class="card mb-3" *ngIf="addingDpRequest">
-    <div class="card-header">New Request</div>
+    <div class="card-header">
+        New Request
+        <span class="pull-right" (click)="close($event)">
+         <i class="fa fa-times"
+            aria-hidden="true"></i>
+        </span>
+    </div>
     <div class="card-block table-responsive">
         <app-dprequest-detail (close)="close($event)"></app-dprequest-detail>
     </div>
@@ -23,7 +29,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let contribution of contributions" >
+            <tr *ngFor="let contribution of contributions">
                 <td (click)="onSelect(contribution)">{{contribution.id}}</td>
                 <td>{{contribution.name}}</td>
             </tr>

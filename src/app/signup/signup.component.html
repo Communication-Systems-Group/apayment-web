@@ -1,27 +1,39 @@
 
 <div class="login-page">
-    {{model | json }}
     <div class="row">
         <div class="col-md-4 push-md-4">
             <img class="user-avatar" src="assets/images/logo.png" width="150px" />
             <h1>Register</h1>
+            {{errMsg}}
+            {{usermodel | json}}
             <form name="form" (ngSubmit)="register()" #f="ngForm" novalidate>
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-                    <input type="text" class="form-control input-underline input-lg" name="firstname" placeholder="Firstname" [(ngModel)]="model.firstname" #firstName="ngModel" required />
+                    <input type="text" class="form-control input-underline input-lg" name="firstname" placeholder="Firstname" [(ngModel)]="usermodel.firstname" #firstname="ngModel" required />
                     <div *ngIf="f.submitted && !firstname.valid" class="help-block">First Name is required</div>
                 </div>
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-                    <input type="text" class="form-control input-underline input-lg" name="lastname" placeholder="Lastname" [(ngModel)]="model.firstname" #lastName="ngModel" required />
+                    <input type="text" class="form-control input-underline input-lg" name="lastname" placeholder="Lastname" [(ngModel)]="usermodel.lastname" #lastname="ngModel" required />
                     <div *ngIf="f.submitted && !lastname.valid" class="help-block">Last Name is required</div>
                 </div>
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-                    <input type="text" class="form-control input-underline input-lg" name="username" placeholder="Username" [(ngModel)]="model.username" #username="ngModel" required />
+                    <input type="text" class="form-control input-underline input-lg" name="username" placeholder="Username" [(ngModel)]="usermodel.username" #username="ngModel" required />
                     <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
                 </div>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+                    <input type="email" class="form-control input-underline input-lg" name="password" placeholder="E-Mail" [(ngModel)]="usermodel.email" #email="ngModel" required />
+                    <div *ngIf="f.submitted && !email.valid" class="help-block">E-Mail is required</div>
+                </div>
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-                    <input type="password" class="form-control input-underline input-lg" name="password" placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required />
+                    <input type="password" class="form-control input-underline input-lg" name="password" placeholder="Password" [(ngModel)]="usermodel.password" #password="ngModel" required />
                     <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
                 </div>
+
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !plantname.valid }">
+                    <input type="text" class="form-control input-underline input-lg" name="plantname" placeholder="Plantname" [(ngModel)]="usermodel.plant.name" #plantname="ngModel" required />
+                    <div *ngIf="f.submitted && !plantname.valid" class="help-block">Plantname is required</div>
+                </div>
+
+
                 <button type="submit" class="btn rounded-btn" [disabled]="!f.form.valid">Register</button>
                 <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
             </form>

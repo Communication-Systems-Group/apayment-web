@@ -3,7 +3,7 @@
         <div class="col-md-4 push-md-4">
             <img src="assets/images/logo.png" width="150px" class="user-avatar"/>
             <h1>Login</h1>
-
+            {{errMsg}}
             <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
                 <div class="form-content">
                     <div class="form-group"
