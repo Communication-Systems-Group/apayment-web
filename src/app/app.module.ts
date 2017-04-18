@@ -7,6 +7,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './guards/auth.guards';
 import {GlobalErrorHandler} from './shared/services/global-error-handler';
+import {AuthenticationService} from './shared/services/authentication.service';
+import {AuthModule} from './shared/modules/auth/auth.module';
 
 
 @NgModule({
@@ -17,12 +19,15 @@ import {GlobalErrorHandler} from './shared/services/global-error-handler';
         BrowserModule,
         FormsModule,
         HttpModule,
-        AppRoutingModule
+        AppRoutingModule,
+        AuthModule
     ],
-    providers: [AuthGuard, {
-        provide: ErrorHandler,
-        useClass: GlobalErrorHandler
-    }],
+    providers: [
+        {provide: ErrorHandler, useClass: GlobalErrorHandler},
+        AuthenticationService,
+        AuthGuard
+    ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

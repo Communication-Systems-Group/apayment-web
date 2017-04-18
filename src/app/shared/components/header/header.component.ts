@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
+import {AuthenticationService} from '../../services/authentication.service';
 
 @Component({
     selector: 'app-header',
@@ -11,7 +12,7 @@ import {User} from '../../models/user.model';
 export class HeaderComponent implements OnInit {
     user: User;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private authenticationService: AuthenticationService) {
     }
 
     ngOnInit() {
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
                 this.user = user;
             },
             error => {
+                console.error(error);
                 console.error('Error fetching user profile');
             }
         );
@@ -32,6 +34,10 @@ export class HeaderComponent implements OnInit {
     toggleSidebar() {
         const dom: any = document.querySelector('body');
         dom.classList.toggle('push-right');
+    }
+
+    logout() {
+        this.authenticationService.logout();
     }
 
     // rltAndLtr() {
