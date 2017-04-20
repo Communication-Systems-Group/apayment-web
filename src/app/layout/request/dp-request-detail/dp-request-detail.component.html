@@ -1,3 +1,4 @@
+{{dpRequest | json}}
 <div *ngIf="dpRequest">
     <h4>Beitragsgesuch für Direktzahlungen und Einzelkulturbeiträge</h4>
     <fieldset class="form-group yes-no">
@@ -22,6 +23,11 @@
             <input type="radio" name="contribution{{contribution.id}}"  id="optionsRadiosInline2" value="option2" checked=""
                    (change)="onContributionSelectionChange(contribution.id,'remove')">
         </label>
+    </fieldset>
+    <fieldset class="form-group">
+        <label>Text area</label>
+        <textarea class="form-control" rows="3" name="remark" placeholder="Remarks..." [(ngModel)]="dpRequest.remark"
+                  #remark="ngModel"></textarea>
     </fieldset>
     <!--<button (click)="goBack()">Back</button>-->
     <button (click)="save()">Save</button>

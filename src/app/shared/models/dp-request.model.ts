@@ -4,4 +4,5 @@ export class DPRequest {
     id: number;
     name: string;
     contributions: Contribution[];
+    remark:string;
 }
