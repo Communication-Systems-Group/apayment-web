@@ -7,5 +7,6 @@ import {Component, Input} from '@angular/core';
 })
 export class PageHeaderComponent {
     @Input() heading: string;
+    @Input() headers: any[];
     @Input() icon: string;
 }

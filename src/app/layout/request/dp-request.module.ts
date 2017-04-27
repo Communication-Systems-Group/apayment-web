@@ -8,6 +8,7 @@ import {DPRequestDetailComponent} from './dp-request-detail/dp-request-detail.co
 import {DPRequestService} from '../../shared/services/dp-request.service';
 import {FormsModule} from '@angular/forms';
 import {ContributionService} from '../../shared/services/contribution.service';
+import {DpRequestNewComponent} from './dp-request-new/dp-request-new.component';
 
 
 @NgModule({
@@ -18,6 +19,6 @@ import {ContributionService} from '../../shared/services/contribution.service';
         FormsModule
     ],
     providers: [DPRequestService, ContributionService],
-    declarations: [DPRequestComponent, DPRequestDetailComponent]
+    declarations: [DPRequestComponent, DPRequestDetailComponent, DpRequestNewComponent]
 })
 export class DPRequestModul { }

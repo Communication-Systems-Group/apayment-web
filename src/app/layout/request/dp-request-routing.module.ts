@@ -6,7 +6,7 @@ import {DPRequestDetailComponent} from './dp-request-detail/dp-request-detail.co
 
 const routes: Routes = [
     { path: '', component: DPRequestComponent },
-    { path: 'detail/:id', component: DPRequestDetailComponent}
+    { path: ':id', component: DPRequestDetailComponent}
 ];
 
 @NgModule({

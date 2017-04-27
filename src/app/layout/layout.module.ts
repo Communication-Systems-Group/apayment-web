@@ -5,6 +5,7 @@ import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 import {LayoutRoutingModule} from './layout-routing.module';
 import {LayoutComponent} from './layout.component';
 import {HeaderComponent, SidebarComponent} from '../shared';
+import {AdminGuard} from '../guards/admin.guards';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {HeaderComponent, SidebarComponent} from '../shared';
         LayoutComponent,
         HeaderComponent,
         SidebarComponent
-    ]
+    ],
+    providers: [AdminGuard]
 })
 export class LayoutModule { }

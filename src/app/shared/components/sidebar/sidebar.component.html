@@ -2,11 +2,11 @@
     <ul class="list-group">
 
         <!--DirectPaymentRequests-->
-        <a [routerLink]="['/requests']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/requests']" [routerLinkActive]="['router-link-active']" *ngIf="authService.hasRole(['Admin', 'Farmer', 'Canton'])" class="list-group-item">
             <i class="fa fa-fw fa-envelope-o"></i>&nbsp;Requests
         </a>
         <!--Contributions-->
-        <a [routerLink]="['/contributions']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/contributions']" [routerLinkActive]="['router-link-active']" *ngIf="authService.hasRole(['Admin'])" class="list-group-item">
             <i class="fa fa-fw fa-tasks"></i>&nbsp;Contributions
         </a>
 

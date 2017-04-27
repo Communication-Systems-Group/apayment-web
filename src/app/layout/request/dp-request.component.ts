@@ -1,18 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {DPRequest} from '../../shared/models/dp-request.model';
+import {DPRequestService} from '../../shared/services/dp-request.service';
+import {Router} from '@angular/router';
 
-const DPREQUESTS: DPRequest[] = [
-    { id: 11, name: 'Mr. Nice', contributions: [] },
-    { id: 12, name: 'Narco', contributions: [] },
-    { id: 13, name: 'Bombasto', contributions: [] },
-    { id: 14, name: 'Celeritas', contributions: [] },
-    { id: 15, name: 'Magneta', contributions: [] },
-    { id: 16, name: 'RubberMan', contributions: [] },
-    { id: 17, name: 'Dynama', contributions: [] },
-    { id: 18, name: 'Dr IQ', contributions: [] },
-    { id: 19, name: 'Magma', contributions: [] },
-    { id: 20, name: 'Tornado', contributions: [] }
-];
 
 @Component({
     selector: 'app-dprequests',
@@ -22,17 +12,31 @@ const DPREQUESTS: DPRequest[] = [
 
 
 export class DPRequestComponent implements OnInit {
-    dpRequests = DPREQUESTS;
+    dpRequests;
     selectedDPRequest: DPRequest;
     addingDpRequest = false;
+    error: any;
 
-    constructor() { }
-    ngOnInit() {
-        console.log('hello');
+    constructor(private router: Router, private dpRequestService: DPRequestService) {
     }
+
+    ngOnInit() {
+        this.dpRequests = [];
+        this.getRequests();
+    }
+
+    getRequests() {
+        this.dpRequestService.getAll().subscribe(
+            (res) => {
+                this.dpRequests = res;
+            },
+        error => this.error = error
+        );
+    }
+
     onSelect(dpRequest: DPRequest): void {
-        console.log(dpRequest)
         this.selectedDPRequest = dpRequest;
+        // this.router.navigate(["requests", "details", dpRequest.id]);
     }
 
     addRequest(): void {
@@ -42,9 +46,7 @@ export class DPRequestComponent implements OnInit {
 
     close(savedDpRequest: DPRequest): void {
         this.addingDpRequest = false;
-        if (savedDpRequest) {
-            // this.getHeroes();
-        }
+        this.getRequests();
     }
 }
 

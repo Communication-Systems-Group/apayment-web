@@ -13,7 +13,7 @@
         </span>
     </div>
     <div class="card-block table-responsive">
-        <app-dprequest-detail (close)="close($event)"></app-dprequest-detail>
+        <app-dp-request-new (close)="close($event)"></app-dp-request-new>
     </div>
 </div>
 
@@ -25,13 +25,17 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Remark</th>
+                <th>Inspektor</th>
+                <th>Created</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let contribution of contributions">
-                <td (click)="onSelect(contribution)">{{contribution.id}}</td>
-                <td>{{contribution.name}}</td>
+            <tr *ngFor="let dpRequest of dpRequests" routerLink="/requests/{{dpRequest.id}}">
+                <td (click)="onSelect(dpRequest)">{{dpRequest.id}}</td>
+                <td>{{dpRequest.remark}}</td>
+                <td>{{dpRequest.inspector?.firstname}} {{dpRequest.inspector?.lastname}}</td>
+                <td>{{dpRequest.created}}</td>
             </tr>
             </tbody>
         </table>
