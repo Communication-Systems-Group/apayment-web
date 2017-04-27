@@ -29,6 +29,11 @@ export class DPRequestService {
         return this.authHttp.get(url).map((response: Response) => response.json());
     }
 
+    getAllForInspection(): Observable<DPRequest[]> {
+        const url = environment.apiURL + this.dpRequestsURL + '/inspection';
+        return this.authHttp.get(url).map((response: Response) => response.json());
+    }
+
     addInspector(request: DPRequest): Observable<DPRequest> {
         const url = environment.apiURL + this.dpRequestsURL + '/inspector';
         return this.authHttp.put(url, request).map((response: Response) => response.json());

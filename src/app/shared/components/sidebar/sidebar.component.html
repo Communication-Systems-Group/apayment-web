@@ -5,6 +5,11 @@
         <a [routerLink]="['/requests']" [routerLinkActive]="['router-link-active']" *ngIf="authService.hasRole(['Admin', 'Farmer', 'Canton'])" class="list-group-item">
             <i class="fa fa-fw fa-envelope-o"></i>&nbsp;Requests
         </a>
+        <!--Inspections-->
+        <a [routerLink]="['/inspections']" [routerLinkActive]="['router-link-active']"
+           *ngIf="authService.hasRole(['Admin', 'Inspector', 'Canton'])" class="list-group-item">
+            <i class="fa fa-fw fa-tasks"></i>&nbsp;Inspections
+        </a>
         <!--Contributions-->
         <a [routerLink]="['/contributions']" [routerLinkActive]="['router-link-active']" *ngIf="authService.hasRole(['Admin'])" class="list-group-item">
             <i class="fa fa-fw fa-tasks"></i>&nbsp;Contributions

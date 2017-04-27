@@ -14,9 +14,10 @@
             <strong>{{dpRequest.user?.firstname}} {{dpRequest.user?.lastname}}</strong><br>
             <a href="mailto:#">first.last@example.com</a>
         </address>
-
     </div>
 
+    <h4>Created</h4>
+    <p>{{dpRequest.created * 1000 | date:'dd.MM.yyyy HH:mm'}}</p>
     <h4>Beitragsgesuch für Direktzahlungen und Einzelkulturbeiträge</h4>
     <ul>
         <li *ngFor="let contribution of dpRequest.contributions">

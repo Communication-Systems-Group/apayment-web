@@ -1,21 +1,4 @@
-<app-page-header [heading]="'Requests'" [icon]="'fa-edit'"></app-page-header>
-
-<p>
-    <button type="button" class="btn btn-primary" (click)="addRequest()">New Request</button>
-</p>
-
-<div class="card mb-3" *ngIf="addingDpRequest">
-    <div class="card-header">
-        New Request
-        <span class="pull-right" (click)="close($event)">
-         <i class="fa fa-times"
-            aria-hidden="true"></i>
-        </span>
-    </div>
-    <div class="card-block table-responsive">
-        <app-dp-request-new (close)="close($event)"></app-dp-request-new>
-    </div>
-</div>
+<app-page-header [heading]="'Inspections'" [icon]="'fa-edit'"></app-page-header>
 
 
 <div class="card mb-3">
