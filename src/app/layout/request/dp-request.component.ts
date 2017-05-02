@@ -12,16 +12,15 @@ import {Router} from '@angular/router';
 
 
 export class DPRequestComponent implements OnInit {
-    dpRequests;
+    dpRequests: DPRequest[];
     selectedDPRequest: DPRequest;
     addingDpRequest = false;
     error: any;
-
     constructor(private router: Router, private dpRequestService: DPRequestService) {
+        this.dpRequests = [];
     }
 
     ngOnInit() {
-        this.dpRequests = [];
         this.getRequests();
     }
 
@@ -30,7 +29,7 @@ export class DPRequestComponent implements OnInit {
             (res) => {
                 this.dpRequests = res;
             },
-        error => this.error = error
+            error => this.error = error
         );
     }
 
@@ -40,6 +39,7 @@ export class DPRequestComponent implements OnInit {
     }
 
     addRequest(): void {
+        console.log('click: add new request');
         this.addingDpRequest = true;
         this.selectedDPRequest = null;
     }

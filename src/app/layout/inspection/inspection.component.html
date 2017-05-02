@@ -11,14 +11,16 @@
                 <th>Remark</th>
                 <th>Inspektor</th>
                 <th>Created</th>
+                <th>&nbsp;</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let dpRequest of dpRequests" routerLink="/requests/{{dpRequest.id}}">
+            <tr *ngFor="let dpRequest of dpRequests">
                 <td (click)="onSelect(dpRequest)">{{dpRequest.id}}</td>
                 <td>{{dpRequest.remark}}</td>
                 <td>{{dpRequest.inspector?.firstname}} {{dpRequest.inspector?.lastname}}</td>
                 <td>{{dpRequest.created * 1000 | date:'dd.MM.yyyy HH:mm'}}</td>
+                <td routerLink="/inspections/{{dpRequest.id}}">Checklist</td>
             </tr>
             </tbody>
         </table>

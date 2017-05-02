@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {environment} from '../../../environments/environment';
 import {AuthHttp} from 'angular2-jwt';
+import {Inspection} from '../models/inspection.model';
 
 @Injectable()
 export class DPRequestService {
@@ -37,5 +38,10 @@ export class DPRequestService {
     addInspector(request: DPRequest): Observable<DPRequest> {
         const url = environment.apiURL + this.dpRequestsURL + '/inspector';
         return this.authHttp.put(url, request).map((response: Response) => response.json());
+    }
+
+    submitInspection(inspection: Inspection): Observable<any> {
+        const url = environment.apiURL + this.dpRequestsURL + '/inspection';
+        return this.authHttp.post(url, inspection).map((response: Response) => response.json());
     }
 }

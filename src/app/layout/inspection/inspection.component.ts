@@ -5,8 +5,7 @@ import {DPRequestService} from '../../shared/services/dp-request.service';
 @Component({
     selector: 'app-inspection',
     templateUrl: './inspection.component.html',
-    styleUrls: ['./inspection.component.scss'],
-    providers: [DPRequestService]
+    styleUrls: ['./inspection.component.scss']
 })
 export class InspectionComponent implements OnInit {
     dpRequests: DPRequest[];

@@ -1,0 +1,19 @@
+<!--<select class="form-control" *ngIf="lacks?.length > 0"-->
+<!--(change)="onLackSelected(contribution.code, $event.target.value)">-->
+<!--<option selected>No Lack</option>-->
+<!--<option *ngFor="let lack of lacks" value="{{lack.id}}">{{lack.name}}</option>-->
+<!--</select>-->
+
+
+<!--{{selectedLack | json}}-->
+<select *ngIf="lacks?.length > 0" [(ngModel)]="selectedLack" (ngModelChange)="onChange($event)">
+    <option selected [ngValue]="undefined">No Lack</option>
+    <option *ngFor="let lack of lacks"
+            [ngValue]="lack">
+        {{ lack.name }}
+    </option>
+</select>
+<div *ngIf="selectedLack">
+    <span>{{selectedLack.points }}</span>
+</div>
+

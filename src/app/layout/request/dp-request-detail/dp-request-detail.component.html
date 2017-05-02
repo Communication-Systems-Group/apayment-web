@@ -26,7 +26,7 @@
     </ul>
 
     <h4>Remark</h4>
-    <p>{{dpRequest.remark}}</p>
+    <p class="line-breaker">{{dpRequest.remark}}</p>
 
     <div *ngIf="authService.hasRole(['Farmer'])">
         <h4 *ngIf="dpRequest.inspector">Inspector</h4>

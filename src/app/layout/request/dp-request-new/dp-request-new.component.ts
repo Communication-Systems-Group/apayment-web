@@ -47,8 +47,6 @@ export class DpRequestNewComponent implements OnInit {
         if (action === 'add') {
             this.contributionService.getContribution(contributionId).subscribe(
                 contribution => {
-                    // TODO: make sure inspectionCriteria does not include contribution
-                    contribution.inspectionCriteria = [];
                     this.dpRequest.contributions.push(contribution);
                 },
                 error => {
