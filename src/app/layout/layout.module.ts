@@ -18,10 +18,11 @@ import {CantonGuard} from '../guards/canton.guards';
         LayoutRoutingModule
     ],
     declarations: [
-        LayoutComponent,
         HeaderComponent,
-        SidebarComponent
+        SidebarComponent,
+        LayoutComponent
     ],
     providers: [AdminGuard, FarmerGuard, InspectorGuard, CantonGuard]
 })
-export class LayoutModule { }
+export class LayoutModule {
+}

@@ -8,9 +8,10 @@ import {DPRequestService} from '../../shared/services/dp-request.service';
     styleUrls: ['./inspection.component.scss']
 })
 export class InspectionComponent implements OnInit {
-    dpRequests: DPRequest[];
+    dpRequests: Array<DPRequest>;
 
     constructor(private dpRequestService: DPRequestService) {
+        this.dpRequests = [];
     }
 
     ngOnInit() {
