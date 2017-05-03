@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
 import {DPRequestService} from '../../../shared/services/dp-request.service';
 import {DPRequest} from '../../../shared/models/dp-request.model';
 import {Inspection} from '../../../shared/models/inspection.model';
 import {Lack} from '../../../shared/models/lack.models';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 
 @Component({
     selector: 'app-inspection-detail',

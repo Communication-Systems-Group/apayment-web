@@ -13,13 +13,11 @@ export class HeaderComponent implements OnInit {
     user: User;
 
     constructor(private userService: UserService, private authenticationService: AuthenticationService) {
-        this.authenticationService.isLoggedIn().subscribe(status => {
-            console.log(status);
-            if (status) {
-                console.log('getProfile');
-                this.getProfile();
-            }
-        });
+        // this.authenticationService.isLoggedIn().subscribe(status => {
+        //     if (status) {
+        //         this.getProfile();
+        //     }
+        // });
     }
 
     ngOnInit() {
