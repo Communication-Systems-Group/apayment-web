@@ -14,7 +14,9 @@ export class HeaderComponent implements OnInit {
 
     constructor(private userService: UserService, private authenticationService: AuthenticationService) {
         this.authenticationService.isLoggedIn().subscribe(status => {
+            console.log(status);
             if (status) {
+                console.log('getProfile');
                 this.getProfile();
             }
         });
@@ -28,6 +30,7 @@ export class HeaderComponent implements OnInit {
         this.userService.getProfile().subscribe(
             user => {
                 this.user = user;
+                console.log(user);
             },
             error => {
                 console.error(error);

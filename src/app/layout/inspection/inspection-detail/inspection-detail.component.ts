@@ -38,7 +38,7 @@ export class InspectionDetailComponent implements OnInit {
                 this.dpRequestService.getById(id).subscribe(
                     dpRequest => {
                         this.dpRequest = dpRequest;
-                        this.inspection.dpRequestId = id;
+                        this.inspection.requestId = id;
                     },
                     error => this.error = error
                 );

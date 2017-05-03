@@ -1,5 +1,5 @@
 export class Inspection {
-    dpRequestId: number;
+    requestId: number;
     // lacks: { pointGroupId: number, lack: Lack }[];
 
     lacks: {
