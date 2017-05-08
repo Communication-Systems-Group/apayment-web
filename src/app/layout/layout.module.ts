@@ -9,13 +9,15 @@ import {AdminGuard} from '../guards/admin.guards';
 import {FarmerGuard} from '../guards/farmer.guards';
 import {InspectorGuard} from '../guards/inspector.guards';
 import {CantonGuard} from '../guards/canton.guards';
+import {SharedPipesModule} from '../shared/pipes/shared-pipes.module';
 
 
 @NgModule({
     imports: [
         CommonModule,
         NgbDropdownModule.forRoot(),
-        LayoutRoutingModule
+        LayoutRoutingModule,
+        SharedPipesModule
     ],
     declarations: [
         HeaderComponent,

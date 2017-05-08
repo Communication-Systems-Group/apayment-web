@@ -1,6 +1,5 @@
 <app-page-header [heading]="'Inspections'" [icon]="'fa-edit'"></app-page-header>
 
-{{ dpRequests | json }}
 <div class="card mb-3">
     <div class="card-header">Striped Rows</div>
     <div class="card-block table-responsive">
@@ -11,6 +10,7 @@
                 <th>Remark</th>
                 <th>Inspektor</th>
                 <th>Created</th>
+                <th>Modified</th>
                 <th>&nbsp;</th>
             </tr>
             </thead>
@@ -20,6 +20,7 @@
                 <td>{{dpRequest.remark}}</td>
                 <td>{{dpRequest.inspector?.firstname}} {{dpRequest.inspector?.lastname}}</td>
                 <td>{{dpRequest.created * 1000 | date:'dd.MM.yyyy HH:mm'}}</td>
+                <td>{{dpRequest.modified * 1000 | date:'dd.MM.yyyy HH:mm'}}</td>
                 <td routerLink="/inspections/{{dpRequest.id}}">Checklist</td>
             </tr>
             </tbody>
