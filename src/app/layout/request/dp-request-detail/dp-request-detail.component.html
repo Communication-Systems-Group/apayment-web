@@ -1,5 +1,5 @@
 <app-page-header [headers]="header" [icon]="'fa-edit'"></app-page-header>
-{{dpRequest | json }}
+
 <div *ngIf="dpRequest">
     <div *ngIf="authService.hasRole(['Canton', 'Admin'])">
         <h4>Requester</h4>
@@ -33,12 +33,23 @@
         <p>{{dpRequest.inspector?.firstname}} {{dpRequest.inspector?.lastname}}</p>
     </div>
     <div *ngIf="authService.hasRole(['Canton', 'Admin'])">
-    <h4>Assign Inspector</h4>
-    <div class="form-group">
-        <select class="form-control" [(ngModel)]="dpRequest.inspector">
-            <option *ngFor="let inspector of inspectors" [ngValue]="inspector" [selected]="inspector.id === dpRequest.inspector?.id" >{{inspector.firstname}} {{inspector.lastname}}</option>        </select>
+        <h4>Assign Inspector</h4>
+        <div class="form-group">
+            <select class="form-control" [(ngModel)]="dpRequest.inspector">
+                <option *ngFor="let inspector of inspectors" [ngValue]="inspector"
+                        [selected]="inspector.id === dpRequest.inspector?.id">
+                    {{inspector.firstname}} {{inspector.lastname}}
+                </option>
+            </select>
+        </div>
     </div>
+    <div *ngIf="dpRequest.contributionsWithLacks">
+        {{dpRequest.contributionsWithLacks | json}}
+        <h4>Inspection Lacks</h4>
+
     </div>
     <button (click)="goBack()">Back</button>
-    <button (click)="save()" [disabled]="!dpRequest.inspector" *ngIf="authService.hasRole(['Canton', 'Admin'])">Save</button>
+    <button (click)="save()" [disabled]="!dpRequest.inspector"
+            *ngIf="authService.hasRole(['Canton', 'Admin'])">Save
+    </button>
 </div>
