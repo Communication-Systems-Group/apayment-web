@@ -18,7 +18,6 @@ export class DPRequestDetailComponent implements OnInit {
     error: any;
     navigated = false; // true if navigated here
     header: any[];
-
     inspectors: User[];
 
     constructor(private route: ActivatedRoute,
@@ -86,4 +85,16 @@ export class DPRequestDetailComponent implements OnInit {
         }
     }
 
+    toggleCollapse(event): void {
+        const element = (event.target as Element);
+        const elementToCollapse: Element = element.parentElement.parentElement.nextElementSibling;
+        const classes = elementToCollapse.getAttribute('class');
+        if (classes.includes('show')) {
+            element.innerHTML = 'Show more';
+            elementToCollapse.setAttribute('class', 'row collapse');
+        } else {
+            element.innerHTML = 'Show less';
+            elementToCollapse.setAttribute('class', 'row collapse show');
+        }
+    }
 }

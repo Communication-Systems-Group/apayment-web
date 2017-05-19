@@ -44,8 +44,63 @@
         </div>
     </div>
     <div *ngIf="dpRequest.contributionsWithLacks">
-        {{dpRequest.contributionsWithLacks | json}}
+        <!--{{dpRequest.contributionsWithLacks | json}}-->
         <h4>Inspection Lacks</h4>
+
+        <div *ngFor="let contribution of dpRequest.contributionsWithLacks" class="card mb-3">
+            <div class="card-header card-default">
+                {{contribution.name}}
+            </div>
+            <div class="card-block">
+                <div *ngFor="let controlCategory of contribution.controlCategories">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            {{controlCategory.controlCategoryId}}
+                        </div>
+                        <div class="col-sm-11">
+                            {{controlCategory.abbreviation}}
+                        </div>
+                    </div>
+                    <div *ngFor="let pointGroup of controlCategory.pointGroups">
+                        <div class="row">
+                            <div class="offset-md-1 col-sm-1">
+                                {{pointGroup.pointGroupId}}
+                            </div>
+                            <div class="col-sm-10">
+                                {{pointGroup.abbreviation}}
+                            </div>
+                        </div>
+                        <div *ngFor="let controlPoint of pointGroup.controlPoints">
+                            <div class="row">
+                                <div class="offset-md-2 col-sm-1">
+                                    {{controlPoint.controlPointId}}
+                                </div>
+                                <div class="col-sm-9">
+                                    {{controlPoint.abbreviation}}
+                                    <span class="link"
+                                          (click)="toggleCollapse( $event)">Show more</span>
+                                </div>
+                            </div>
+                            <div class="row collapse" id="controlPoint_{{controlPoint.id}}">
+                                <div class="offset-md-2 col-sm-10">
+                                    {{controlPoint.controlPoint}}
+                                </div>
+                            </div>
+                            <div *ngFor="let lack of controlPoint.lacks">
+                                <div class="row">
+                                    <div class="offset-md-3 col-sm-5">
+                                        {{lack.name}}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        {{lack.points}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
     <button (click)="goBack()">Back</button>

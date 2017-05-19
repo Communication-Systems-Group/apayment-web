@@ -9,3 +9,13 @@
     white-space: pre-line;
 }
 
+.link {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+.link:hover {
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #555;
+}
