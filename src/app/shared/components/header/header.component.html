@@ -3,7 +3,7 @@
         <button class="navbar-toggler navbar-toggler-right" (click)="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">FoodChain</a>
+        <a class="navbar-brand" href="#">aPayment</a>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 
             <ul class="navbar-nav ml-auto mt-2 mt-md-0">
@@ -78,7 +78,7 @@
                         <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="jvascript:void(0)"><i
+                        <a class="dropdown-item" [routerLink]="['/profile']"><i
                             class="fa fa-fw fa-user"></i> Profile</a>
                         <a class="dropdown-item" href="jvascript:void(0)"><i
                             class="fa fa-fw fa-envelope"></i> Inbox</a>
@@ -91,4 +91,5 @@
             </ul>
         </div>
     </nav>
+
 </div>

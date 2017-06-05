@@ -24,6 +24,7 @@ const routes: Routes = [
                 loadChildren: './contribution/contribution.module#ContributionModule',
                 canActivate: [AdminGuard]
             },
+            {path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
             {path: 'charts', loadChildren: './charts/charts.module#ChartsModule'},
             {path: 'tables', loadChildren: './tables/tables.module#TablesModule'},
             {path: 'forms', loadChildren: './form/form.module#FormModule'},

@@ -7,6 +7,7 @@ export class Inspection {
         controlCategoryId: string,
         pointGroupId: string,
         controlPointId: string,
-        lackId?: number
+        lackId?: number,
+        points?: number,
     }[];
 }

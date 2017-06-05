@@ -9,6 +9,7 @@ import {AuthGuard} from './guards/auth.guards';
 import {GlobalErrorHandler} from './shared/services/global-error-handler';
 import {AuthenticationService} from './shared/services/authentication.service';
 import {AuthModule} from './shared/modules/auth/auth.module';
+import {NgNotifyPopup} from 'ng2-notify-popup';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {AuthModule} from './shared/modules/auth/auth.module';
         FormsModule,
         HttpModule,
         AppRoutingModule,
-        AuthModule
+        AuthModule,
+        NgNotifyPopup
     ],
     providers: [
         {provide: ErrorHandler, useClass: GlobalErrorHandler},

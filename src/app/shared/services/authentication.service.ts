@@ -3,13 +3,15 @@ import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {environment} from '../../../environments/environment';
 import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthenticationService {
     authenticationURL = '/user/login';
     jwtHelper: JwtHelper = new JwtHelper();
 
-    // private _isLoggedIn: Subject<boolean> = new BehaviorSubject<boolean>(false);
+    private _isLoggedIn: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(private http: Http) {
     }
@@ -38,11 +40,11 @@ export class AuthenticationService {
         localStorage.removeItem('user');
     }
 
-    // isLoggedIn() {
-    //     this.loggedIn() && this._isLoggedIn.next(true);
-    //     !this.loggedIn() && this._isLoggedIn.next(false);
-    //     return this._isLoggedIn.asObservable();
-    // }
+    isLoggedIn() {
+        this.loggedIn() && this._isLoggedIn.next(true);
+        !this.loggedIn() && this._isLoggedIn.next(false);
+        return this._isLoggedIn.asObservable();
+    }
 
     loggedIn() {
         return tokenNotExpired();

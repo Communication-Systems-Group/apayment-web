@@ -61,7 +61,8 @@ export class InspectionDetailComponent implements OnInit {
                     controlCategoryId: controlCategoryId,
                     pointGroupId: pointGroupId,
                     controlPointId: controlPointId,
-                    lackId: lack.id
+                    lackId: lack.id,
+                    points: lack.points
                 };
             } else {
                 this.inspection.lacks.splice(index, 1);
@@ -72,7 +73,8 @@ export class InspectionDetailComponent implements OnInit {
                 controlCategoryId: controlCategoryId,
                 pointGroupId: pointGroupId,
                 controlPointId: controlPointId,
-                lackId: lack.id
+                lackId: lack.id,
+                points: lack.points
             });
         }
     }

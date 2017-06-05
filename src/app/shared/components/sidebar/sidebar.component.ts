@@ -11,7 +11,7 @@ export class SidebarComponent {
     isActive = false;
     showMenu = '';
 
-    constructor(private authService: AuthenticationService) {
+    constructor(public authService: AuthenticationService) {
     }
 
     eventCalled() {
