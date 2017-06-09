@@ -5,7 +5,7 @@ export class Inspection {
     lacks: {
         contributionCode: number,
         controlCategoryId: string,
-        pointGroupId: string,
+        pointGroupCode: number,
         controlPointId: string,
         lackId?: number,
         points?: number,
