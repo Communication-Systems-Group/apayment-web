@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../shared/services/authentication.service';
+import {NotificationService} from 'ng2-notify-popup';
 
 @Component({
     selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
     returnURL: string;
     errMsg: string;
 
-    constructor(private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) {
+    constructor(private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService, private notify: NotificationService) {
     }
 
     ngOnInit() {
@@ -23,10 +24,12 @@ export class LoginComponent implements OnInit {
     login() {
         this.authenticationService.login(this.model.username, this.model.password).subscribe(
             data => {
+                this.notify.show('Login successful', {type: 'success'});
                 this.router.navigate([this.returnURL]);
             },
             error => {
-                this.errMsg = 'Username and password do not match.';
+                // this.errMsg = '';
+                this.notify.show('Username and password do not match.', {type: 'error'});
                 // TODO: Handle error
                 console.log('Error login: ' + error.toString());
             }
