@@ -4,11 +4,12 @@ import {Contribution} from '../../../shared/models/contribution.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {DPRequestService} from '../../../shared/services/dp-request.service';
 import {ContributionService} from '../../../shared/services/contribution.service';
+import {NotificationService} from 'ng2-notify-popup';
 
 @Component({
-  selector: 'app-dp-request-new',
-  templateUrl: './dp-request-new.component.html',
-  styleUrls: ['./dp-request-new.component.scss']
+    selector: 'app-dp-request-new',
+    templateUrl: './dp-request-new.component.html',
+    styleUrls: ['./dp-request-new.component.scss']
 })
 export class DpRequestNewComponent implements OnInit {
     @Input() dpRequest: DPRequest;
@@ -19,7 +20,8 @@ export class DpRequestNewComponent implements OnInit {
 
     contributions: Contribution[];
 
-    constructor(private route: ActivatedRoute,
+    constructor(private notify: NotificationService,
+                private route: ActivatedRoute,
                 private dpRequestService: DPRequestService,
                 private contributionService: ContributionService) {
     }
@@ -50,6 +52,7 @@ export class DpRequestNewComponent implements OnInit {
                     this.dpRequest.contributions.push(contribution);
                 },
                 error => {
+                    this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
                     console.error(error);
                 }
             );
@@ -76,7 +79,10 @@ export class DpRequestNewComponent implements OnInit {
                 this.dpRequest = dpRequest; //
                 this.goBack(dpRequest);
             },
-            error => this.error = error // TODO: Display error message
+            error => {
+                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                this.error = error;
+            } // TODO: Display error message
         );
         // this.close.emit(savedDPRequest);
     }

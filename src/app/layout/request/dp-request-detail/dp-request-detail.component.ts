@@ -58,7 +58,11 @@ export class DPRequestDetailComponent implements OnInit {
             inspectors => {
                 this.inspectors = inspectors;
             },
-            error => this.error = error
+            error => {
+                this.error = error;
+                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+            }
+
         );
     }
 
@@ -68,7 +72,10 @@ export class DPRequestDetailComponent implements OnInit {
                 console.log('success');
                 this.notify.show('Inspector set', {type: 'success'});
             },
-            error => this.error = error // TODO: Display error message
+            error => {
+                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                this.error = error;
+            } // TODO: Display error message
         );
         // this.dpRequestService
         // .create(this.dpRequest)
