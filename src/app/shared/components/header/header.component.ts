@@ -18,12 +18,6 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.authenticationService.isLoggedIn().subscribe(status => {
-            if (status) {
-                //this.getProfile();
-            }
-            console.log(status)
-        });
         this.getProfile();
     }
 

@@ -6,10 +6,10 @@ import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './guards/auth.guards';
-import {GlobalErrorHandler} from './shared/services/global-error-handler';
 import {AuthenticationService} from './shared/services/authentication.service';
 import {AuthModule} from './shared/modules/auth/auth.module';
 import {NgNotifyPopup} from 'ng2-notify-popup';
+import {GlobalErrorHandler} from './shared/services/global-error-handler';
 
 
 @NgModule({

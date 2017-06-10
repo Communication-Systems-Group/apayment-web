@@ -3,15 +3,11 @@ import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {environment} from '../../../environments/environment';
 import {JwtHelper, tokenNotExpired} from 'angular2-jwt';
-import {Subject} from 'rxjs/Subject';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthenticationService {
     authenticationURL = '/user/login';
     jwtHelper: JwtHelper = new JwtHelper();
-
-    private _isLoggedIn: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(private http: Http) {
     }
@@ -40,20 +36,16 @@ export class AuthenticationService {
         localStorage.removeItem('user');
     }
 
-    isLoggedIn() {
-        this.loggedIn() && this._isLoggedIn.next(true);
-        !this.loggedIn() && this._isLoggedIn.next(false);
-        return this._isLoggedIn.asObservable();
-    }
-
     loggedIn() {
         return tokenNotExpired();
     }
 
     hasRole(rolenames: string[]): boolean {
-        for (const rolename of rolenames) {
-            if (this.jwtHelper.decodeToken(localStorage.getItem('token')).roles.indexOf(rolename) > -1) {
-                return true;
+        if (localStorage.getItem('token') != null) {
+            for (const rolename of rolenames) {
+                if (this.jwtHelper.decodeToken(localStorage.getItem('token')).roles.indexOf(rolename) > -1) {
+                    return true;
+                }
             }
         }
         return false;

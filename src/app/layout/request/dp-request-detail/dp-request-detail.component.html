@@ -1,98 +1,114 @@
 <app-page-header [headers]="header" [icon]="'fa-edit'"></app-page-header>
 
 <div *ngIf="dpRequest">
-    <div *ngIf="authService.hasRole(['Canton', 'Admin'])">
-        <h4>Requester</h4>
-        <address>
-            <strong>Twitter, Inc.</strong><br>
-            1355 Market Street, Suite 900<br>
-            San Francisco, CA 94103<br>
-            <abbr title="Phone">P:</abbr> (123) 456-7890
-        </address>
 
-        <address>
-            <strong>{{dpRequest.user?.firstname}} {{dpRequest.user?.lastname}}</strong><br>
-            <a href="mailto:#">first.last@example.com</a>
-        </address>
-    </div>
+    <div class="card mb-3" *ngIf="authService.hasRole(['Canton', 'Admin'])">
+        <div class="card-header">
+            <h4>Requester</h4>
+            Created: {{dpRequest.created * 1000 | date:'dd.MM.yyyy HH:mm'}}
+        </div>
+        <div class="card-block table-responsive">
+            <address>
+                <strong>Twitter, Inc.</strong><br>
+                1355 Market Street, Suite 900<br>
+                San Francisco, CA 94103<br>
+                <abbr title="Phone">P:</abbr> (123) 456-7890
+            </address>
 
-    <h4>Created</h4>
-    <p>{{dpRequest.created * 1000 | date:'dd.MM.yyyy HH:mm'}}</p>
-    <h4>Beitragsgesuch für Direktzahlungen und Einzelkulturbeiträge</h4>
-    <ul>
-        <li *ngFor="let contribution of dpRequest.contributions">
-            {{contribution.code}} - {{contribution.name}}
-        </li>
-    </ul>
-
-    <h4>Remark</h4>
-    <p class="line-breaker">{{dpRequest.remark}}</p>
-
-    <div *ngIf="authService.hasRole(['Farmer'])">
-        <h4 *ngIf="dpRequest.inspector">Inspector</h4>
-        <p>{{dpRequest.inspector?.firstname}} {{dpRequest.inspector?.lastname}}</p>
-    </div>
-    <div *ngIf="authService.hasRole(['Canton', 'Admin'])">
-        <h4>Assign Inspector</h4>
-        <div class="form-group">
-            <select class="form-control" [(ngModel)]="dpRequest.inspector">
-                <option *ngFor="let inspector of inspectors" [ngValue]="inspector"
-                        [selected]="inspector.id === dpRequest.inspector?.id">
-                    {{inspector.firstname}} {{inspector.lastname}}
-                </option>
-            </select>
+            <address>
+                <strong>{{dpRequest.user?.firstname}} {{dpRequest.user?.lastname}}</strong><br>
+                <a href="mailto:#">first.last@example.com</a>
+            </address>
         </div>
     </div>
-    <div *ngIf="dpRequest.contributionsWithLacks">
-        <!--{{dpRequest.contributionsWithLacks | json}}-->
-        <h4>Inspection Lacks</h4>
 
-        <div *ngFor="let contribution of dpRequest.contributionsWithLacks" class="card mb-3">
-            <div class="card-header card-default">
-                {{contribution.name}}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4>Beitragsgesuch für Direktzahlungen und Einzelkulturbeiträge</h4>
+        </div>
+        <div class="card-block table-responsive">
+            <ul>
+                <li *ngFor="let contribution of dpRequest.contributions">
+                    {{contribution.code}} - {{contribution.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4>Inspector</h4>
+        </div>
+        <div class="card-block table-responsive">
+            <div *ngIf="authService.hasRole(['Farmer'])">
+                <p>{{dpRequest.inspector?.firstname}} {{dpRequest.inspector?.lastname}}</p>
             </div>
-            <div class="card-block">
-                <div *ngFor="let controlCategory of contribution.controlCategories">
-                    <div class="row">
-                        <div class="col-sm-1">
-                            {{controlCategory.controlCategoryId}}
-                        </div>
-                        <div class="col-sm-11">
-                            {{controlCategory.abbreviation}}
-                        </div>
-                    </div>
-                    <div *ngFor="let pointGroup of controlCategory.pointGroups">
+            <div *ngIf="authService.hasRole(['Canton', 'Admin'])">
+                <div class="form-group">
+                    <select class="form-control" [(ngModel)]="dpRequest.inspector">
+                        <option *ngFor="let inspector of inspectors" [ngValue]="inspector"
+                                [selected]="inspector.id === dpRequest.inspector?.id">
+                            {{inspector.firstname}} {{inspector.lastname}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3" *ngIf="dpRequest.contributionsWithLacks.length > 0">
+        <div class="card-header">
+            <h4>Inspection Lacks</h4>
+        </div>
+        <div class="card-block table-responsive">
+            <div *ngFor="let contribution of dpRequest.contributionsWithLacks" class="card mb-3">
+                <div class="card-header card-default">
+                    {{contribution.name}}
+                </div>
+                <div class="card-block">
+                    <div *ngFor="let controlCategory of contribution.controlCategories">
                         <div class="row">
-                            <div class="offset-md-1 col-sm-1">
-                                {{pointGroup.pointGroupId}}
+                            <div class="col-sm-1">
+                                {{controlCategory.controlCategoryId}}
                             </div>
-                            <div class="col-sm-10">
-                                {{pointGroup.abbreviation}}
+                            <div class="col-sm-11">
+                                {{controlCategory.abbreviation}}
                             </div>
                         </div>
-                        <div *ngFor="let controlPoint of pointGroup.controlPoints">
+                        <div *ngFor="let pointGroup of controlCategory.pointGroups">
                             <div class="row">
-                                <div class="offset-md-2 col-sm-1">
-                                    {{controlPoint.controlPointId}}
+                                <div class="offset-md-1 col-sm-1">
+                                    {{pointGroup.pointGroupId}}
                                 </div>
-                                <div class="col-sm-9">
-                                    {{controlPoint.abbreviation}}
-                                    <span class="link"
-                                          (click)="toggleCollapse( $event)">Show more</span>
+                                <div class="col-sm-10">
+                                    {{pointGroup.abbreviation}}
                                 </div>
                             </div>
-                            <div class="row collapse" id="controlPoint_{{controlPoint.id}}">
-                                <div class="offset-md-2 col-sm-10">
-                                    {{controlPoint.controlPoint}}
-                                </div>
-                            </div>
-                            <div *ngFor="let lack of controlPoint.lacks">
+                            <div *ngFor="let controlPoint of pointGroup.controlPoints">
                                 <div class="row">
-                                    <div class="offset-md-3 col-sm-5">
-                                        {{lack.name}}
+                                    <div class="offset-md-2 col-sm-1">
+                                        {{controlPoint.controlPointId}}
                                     </div>
-                                    <div class="col-sm-2">
-                                        {{lack.points}}
+                                    <div class="col-sm-9">
+                                        {{controlPoint.abbreviation}}
+                                        <span class="link"
+                                              (click)="toggleCollapse( $event)">Show more</span>
+                                    </div>
+                                </div>
+                                <div class="row collapse" id="controlPoint_{{controlPoint.id}}">
+                                    <div class="offset-md-2 col-sm-10">
+                                        {{controlPoint.controlPoint}}
+                                    </div>
+                                </div>
+                                <div *ngFor="let lack of controlPoint.lacks">
+                                    <div class="row">
+                                        <div class="offset-md-3 col-sm-5">
+                                            {{lack.name}}
+                                        </div>
+                                        <div class="col-sm-2">
+                                            {{lack.points}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -101,8 +117,109 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+
+    <div class="card mb-3" *ngIf="dpRequest.gve.length > 0">
+        <div class="card-header">
+            <h4>GVE</h4>
+            <button (click)="updateGVE()">Update GVE</button>
+        </div>
+        <div class="card-block table-responsive">
+            <div class="row" *ngFor="let gve of dpRequest.gve">
+                <div class="col-sm-3" *ngIf="gve.amount > 0">{{gve.pointGroup?.pointGroup}}</div>
+                <div class="col-sm-6" *ngIf="gve.amount > 0">{{gve.amount}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4>payments</h4>
+        </div>
+        <div class="card-block table-responsive">
+            {{dpRequest.remark}}
+        </div>
+    </div>
+
+
+    <!--<div *ngIf="authService.hasRole(['Farmer'])">-->
+    <!--<h4 *ngIf="dpRequest.inspector">Inspector</h4>-->
+    <!--<p>{{dpRequest.inspector?.firstname}} {{dpRequest.inspector?.lastname}}</p>-->
+    <!--</div>-->
+    <!--<div *ngIf="authService.hasRole(['Canton', 'Admin'])">-->
+    <!--<h4>Assign Inspector</h4>-->
+    <!--<div class="form-group">-->
+    <!--<select class="form-control" [(ngModel)]="dpRequest.inspector">-->
+    <!--<option *ngFor="let inspector of inspectors" [ngValue]="inspector"-->
+    <!--[selected]="inspector.id === dpRequest.inspector?.id">-->
+    <!--{{inspector.firstname}} {{inspector.lastname}}-->
+    <!--</option>-->
+    <!--</select>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div *ngIf="dpRequest.contributionsWithLacks.length > 0">-->
+    <!--&lt;!&ndash;{{dpRequest.contributionsWithLacks | json}}&ndash;&gt;-->
+    <!--<h4>Inspection Lacks</h4>-->
+
+    <!--<div *ngFor="let contribution of dpRequest.contributionsWithLacks" class="card mb-3">-->
+    <!--<div class="card-header card-default">-->
+    <!--{{contribution.name}}-->
+    <!--</div>-->
+    <!--<div class="card-block">-->
+    <!--<div *ngFor="let controlCategory of contribution.controlCategories">-->
+    <!--<div class="row">-->
+    <!--<div class="col-sm-1">-->
+    <!--{{controlCategory.controlCategoryId}}-->
+    <!--</div>-->
+    <!--<div class="col-sm-11">-->
+    <!--{{controlCategory.abbreviation}}-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div *ngFor="let pointGroup of controlCategory.pointGroups">-->
+    <!--<div class="row">-->
+    <!--<div class="offset-md-1 col-sm-1">-->
+    <!--{{pointGroup.pointGroupId}}-->
+    <!--</div>-->
+    <!--<div class="col-sm-10">-->
+    <!--{{pointGroup.abbreviation}}-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div *ngFor="let controlPoint of pointGroup.controlPoints">-->
+    <!--<div class="row">-->
+    <!--<div class="offset-md-2 col-sm-1">-->
+    <!--{{controlPoint.controlPointId}}-->
+    <!--</div>-->
+    <!--<div class="col-sm-9">-->
+    <!--{{controlPoint.abbreviation}}-->
+    <!--<span class="link"-->
+    <!--(click)="toggleCollapse( $event)">Show more</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row collapse" id="controlPoint_{{controlPoint.id}}">-->
+    <!--<div class="offset-md-2 col-sm-10">-->
+    <!--{{controlPoint.controlPoint}}-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div *ngFor="let lack of controlPoint.lacks">-->
+    <!--<div class="row">-->
+    <!--<div class="offset-md-3 col-sm-5">-->
+    <!--{{lack.name}}-->
+    <!--</div>-->
+    <!--<div class="col-sm-2">-->
+    <!--{{lack.points}}-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+
     <button (click)="goBack()">Back</button>
     <button (click)="save()" [disabled]="!dpRequest.inspector"
             *ngIf="authService.hasRole(['Canton', 'Admin'])">Save

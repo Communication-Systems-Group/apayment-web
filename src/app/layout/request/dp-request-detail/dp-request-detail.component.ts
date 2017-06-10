@@ -50,7 +50,10 @@ export class DPRequestDetailComponent implements OnInit {
                 );
             }
         });
-        this.getInspectors();
+        if (!this.authService.hasRole(['Farmer'])) {
+            this.getInspectors();
+        }
+
     }
 
     getInspectors() {
@@ -62,7 +65,6 @@ export class DPRequestDetailComponent implements OnInit {
                 this.error = error;
                 this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
             }
-
         );
     }
 
@@ -89,10 +91,24 @@ export class DPRequestDetailComponent implements OnInit {
     }
 
     goBack(savedDPRequest: DPRequest = null): void {
-        if (this.navigated
-        ) {
+        if (this.navigated) {
             window.history.back();
         }
+    }
+
+    updateGVE(): void {
+        this.dpRequestService.updateGVE(this.dpRequest).subscribe(
+            dpRequest => {
+                this.dpRequest = dpRequest;
+                if (!this.authService.hasRole(['Farmer'])) {
+                    this.getInspectors();
+                }
+            },
+            error => {
+                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                this.error = error;
+            }
+        );
     }
 
     toggleCollapse(event): void {

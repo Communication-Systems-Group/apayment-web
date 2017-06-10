@@ -8,7 +8,7 @@ export class GlobalErrorHandler implements ErrorHandler {
     }
 
     handleError(error: Response | any) {
-        console.info('global error Handler');
+        console.log('global error Handler');
 
         // In a real world app, you might use a remote logging infrastructure
         let errMsg: string;
@@ -19,7 +19,6 @@ export class GlobalErrorHandler implements ErrorHandler {
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
-
 
 
         const location = this.injector.get(LocationStrategy);

@@ -44,4 +44,9 @@ export class DPRequestService {
         const url = environment.apiURL + this.dpRequestsURL + '/inspection';
         return this.authHttp.post(url, inspection).map((response: Response) => response.json());
     }
+
+    updateGVE(request: DPRequest): Observable<DPRequest> {
+        const url = environment.apiURL + this.dpRequestsURL + '/gve';
+        return this.authHttp.put(url, request).map((response: Response) => response.json());
+    }
 }

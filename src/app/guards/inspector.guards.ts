@@ -8,7 +8,7 @@ export class InspectorGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.authenticationService.hasRole(['Inspector'])) {
+        if (this.authenticationService.hasRole(['Inspector', 'Canton'])) {
             // logged in so return true
             return true;
         }
