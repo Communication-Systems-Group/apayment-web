@@ -82,7 +82,6 @@ export class InspectionDetailComponent implements OnInit {
     submitInspection() {
         this.dpRequestService.submitInspection(this.inspection).subscribe(
             result => {
-                console.log(result);
                 this.router.navigate(['inspections']);
             },
             error => this.error = error
