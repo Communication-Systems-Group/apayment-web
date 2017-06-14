@@ -52,6 +52,6 @@ export class DPRequestService {
 
     triggerPayment(request: DPRequest): Observable<DPRequest> {
         const url = environment.apiURL + this.dpRequestsURL + '/pay';
-        return this.authHttp.put(url, request).map((response: Response) => response.json());
+        return this.authHttp.post(url, request).map((response: Response) => response.json());
     }
 }

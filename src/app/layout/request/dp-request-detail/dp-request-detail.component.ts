@@ -123,4 +123,19 @@ export class DPRequestDetailComponent implements OnInit {
             elementToCollapse.setAttribute('class', 'row collapse show');
         }
     }
+
+    pay(): void {
+        this.dpRequestService.triggerPayment(this.dpRequest).subscribe(
+            dpRequest => {
+                this.dpRequest = dpRequest;
+                if (!this.authService.hasRole(['Farmer'])) {
+                    this.getInspectors();
+                }
+            },
+            error => {
+                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                this.error = error;
+            }
+        );
+    }
 }

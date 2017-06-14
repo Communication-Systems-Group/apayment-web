@@ -137,12 +137,28 @@
 
     <div class="card mb-3">
         <div class="card-header">
-            <h4>payments</h4>
+            <h4>Payments</h4>
         </div>
         <div class="card-block table-responsive">
-
-            <button class="btn btn-danger">1. Payment</button>
-
+            <div *ngIf="authService.hasRole(['Canton', 'Admin'])">
+                <button class="btn btn-danger" (click)="pay()"
+                        *ngIf="dpRequest.payments.length == 0">1. Payment (1. May)
+                </button>
+                <button class="btn btn-danger" (click)="pay()"
+                        *ngIf="dpRequest.payments.length == 1">2. Payment (1. July)
+                </button>
+                <button class="btn btn-danger" (click)="pay()"
+                        *ngIf="dpRequest.payments.length == 2">3. Payment (31. December)
+                </button>
+            </div>
+            <div class="row" *ngFor="let payment of dpRequest.payments">
+                <div class="col-sm-2">{{payment.timestamp * 1000 | date:'dd.MM.yyyy HH:mm'}}</div>
+                <div class="col-sm-5">{{payment.from}}</div>
+                <div class="col-sm-5">CHF {{payment.amount / 100}}</div>
+            </div>
+            <div *ngIf="dpRequest.payments.length == 0">
+                No Payments yet
+            </div>
         </div>
     </div>
 
