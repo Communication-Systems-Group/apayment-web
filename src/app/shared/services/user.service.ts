@@ -32,6 +32,11 @@ export class UserService {
         return this.authHttp.get(url).map((response: Response) => response.json());
     }
 
+    getAllUsers(): Observable<User[]> {
+        const url = environment.apiURL + this.userURL;
+        return this.authHttp.get(url).map((response: Response) => response.json());
+    }
+
     // private handleError(error: any) {
     //     // In a real world app, we might use a remote logging infrastructure
     //     // We'd also dig deeper into the error to get a better message

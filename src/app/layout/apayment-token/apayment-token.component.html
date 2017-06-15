@@ -1,0 +1,40 @@
+<app-page-header [heading]="'APayment Token'" [icon]="'fa-edit'"></app-page-header>
+
+
+<div class="card mb-3">
+    <div class="card-header">Transfer Tokens</div>
+    <div class="card-block table-responsive">
+        <p>Initial, the total supply is on the "System Account". This function allow to send some
+            tokens another account</p>
+        {{model | json }}
+        <form (ngSubmit)="execTransfer()" #sendTransferForm="ngForm">
+            <div class="form-group">
+                <label for="receiver">Receiver</label>
+                <select class="form-control" id="receiver" required [(ngModel)]="model.receiver"
+                        name="receiver">
+                    <option *ngFor="let user of users" [value]="user.address">{{user.firstname}}
+                        {{user.lastname}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" class="form-control" id="amount" required
+                       [(ngModel)]="model.amount" name="amount">
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!sendTransferForm.form.valid">
+                Execute Transfer
+            </button>
+        </form>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">All Transfers</div>
+    <div class="card-block table-responsive">
+
+    </div>
+</div>
+
+

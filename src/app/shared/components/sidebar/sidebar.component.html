@@ -15,6 +15,12 @@
             <i class="fa fa-fw fa-tasks"></i>&nbsp;Contributions
         </a>
 
+        <!--APayment Token-->
+        <a [routerLink]="['/token']" [routerLinkActive]="['router-link-active']"
+           *ngIf="authService.hasRole(['Admin'])" class="list-group-item">
+            <i class="fa fa-fw fa-money"></i>&nbsp;Tokens
+        </a>
+
         <!--<a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">-->
             <!--<i class="fa fa-fw fa-dashboard"></i>&nbsp;Dashboard-->
         <!--</a>-->
