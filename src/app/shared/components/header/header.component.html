@@ -74,7 +74,7 @@
                 <div class="nav-item dropdown" ngbDropdown>
                     <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                         <i class="fa fa-user"></i>
-                        <span *ngIf="user"> {{user.firstname}} {{user.lastname}} (ETC {{user.ethereumBalance | weiConverter : 'ether' }} ) </span>
+                        <span *ngIf="user"> {{user.firstname}} {{user.lastname}} (+DP {{user.apaymentTokenBalance}} | ETC {{user.ethereumBalance | weiConverter : 'ether' }} ) </span>
                         <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
