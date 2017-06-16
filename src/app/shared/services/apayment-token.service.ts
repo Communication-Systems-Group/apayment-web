@@ -21,4 +21,9 @@ export class APaymentTokenService {
         const url = environment.apiURL + this.apaymentTokenURL;
         return this.authHttp.post(url, aPaymentTokenTransfer).map((response: Response) => response.json());
     }
+
+    getTransactions(): Observable<Object[]> {
+        const url = environment.apiURL + this.apaymentTokenURL + '/transactions';
+        return this.authHttp.get(url).map((response: Response) => response.json());
+    }
 }

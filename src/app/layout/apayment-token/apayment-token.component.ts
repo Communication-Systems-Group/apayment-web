@@ -13,6 +13,8 @@ export class APaymentTokenComponent implements OnInit {
 
     model = {to: '', amount: 0};
     users = [];
+    transactions = [];
+
 
     submitted = false;
 
@@ -21,12 +23,24 @@ export class APaymentTokenComponent implements OnInit {
 
     ngOnInit() {
         this.getAllUsers();
+        this.getAllTransactions();
     }
 
     getAllUsers() {
         this.userService.getAllUsers().subscribe(
             users => {
                 this.users = users;
+            },
+            error => {
+                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+            }
+        );
+    }
+
+    getAllTransactions() {
+        this.apaymentTokenService.getTransactions().subscribe(
+            transactions => {
+                this.transactions = transactions;
             },
             error => {
                 this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
