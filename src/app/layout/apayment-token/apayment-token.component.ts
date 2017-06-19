@@ -15,9 +15,6 @@ export class APaymentTokenComponent implements OnInit {
     users = [];
     transactions = [];
 
-
-    submitted = false;
-
     constructor(private userService: UserService, private notify: NotificationService, private apaymentTokenService: APaymentTokenService) {
     }
 
@@ -49,11 +46,10 @@ export class APaymentTokenComponent implements OnInit {
     }
 
     execTransfer() {
-        console.log('sent');
-        this.submitted = true;
         this.apaymentTokenService.transfer(this.model).subscribe(
             result => {
-                this.notify.show(JSON.stringify(result), {type: 'success'});
+                this.model = {to: '', amount: 0};
+                this.notify.show('Transfer submitted. Once the transaction has been executed it will show up.', {type: 'success'});
             },
             error => {
                 this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});

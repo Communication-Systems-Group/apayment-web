@@ -153,8 +153,9 @@
             </div>
             <div class="row" *ngFor="let payment of dpRequest.payments">
                 <div class="col-sm-2">{{payment.timestamp * 1000 | date:'dd.MM.yyyy HH:mm'}}</div>
-                <div class="col-sm-5">{{payment.from}}</div>
-                <div class="col-sm-5">CHF {{payment.amount / 100}}</div>
+                <div class="col-sm-3">{{payment.from.firstname}} {{payment.from.lastname}}</div>
+                <div class="col-sm-3">CHF {{payment.amount / 100}}</div>
+                <div class="col-sm-4">{{payment.message}}</div>
             </div>
             <div *ngIf="dpRequest.payments.length == 0">
                 No Payments yet

@@ -6,7 +6,6 @@
     <div class="card-block table-responsive">
         <p>Initial, the total supply is on the "System Account". This function allow to send some
             tokens another account</p>
-        {{model | json }}
         <form (ngSubmit)="execTransfer()" #sendTransferForm="ngForm">
             <div class="form-group">
                 <label for="receiver">Receiver</label>
@@ -22,6 +21,11 @@
                 <label for="amount">Amount</label>
                 <input type="number" class="form-control" id="amount" required
                        [(ngModel)]="model.amount" name="amount">
+            </div>
+            <div class="form-group">
+                <label for="amount">Message</label>
+                <input type="text" class="form-control" id="message" required
+                       [(ngModel)]="model.message" name="message">
             </div>
             <button type="submit" class="btn btn-success" [disabled]="!sendTransferForm.form.valid">
                 Execute Transfer
@@ -41,6 +45,7 @@
                 <th>Reciever</th>
                 <th>Amount</th>
                 <th>Message</th>
+                <th>Request</th>
             </tr>
             </thead>
             <tbody>
@@ -50,33 +55,12 @@
                 <td>{{transaction.to.firstname}} {{transaction.to.lastname}}</td>
                 <td>{{transaction.amount}}</td>
                 <td>{{transaction.message}}</td>
+                <td>
+                    <a *ngIf="transaction.request"
+                       routerLink="/requests/{{transaction.request?.id}}">Link</a>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-
-<!--
-
- <table class="table table-hover table-striped">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Remark</th>
-                <th>Inspektor</th>
-                <th>Created</th>
-                <th>Modified</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let dpRequest of dpRequests" routerLink="/requests/{{dpRequest.id}}">
-                <td (click)="onSelect(dpRequest)">{{dpRequest.id}}</td>
-                <td>{{dpRequest.remark}}</td>
-                <td>{{dpRequest.inspector?.firstname}} {{dpRequest.inspector?.lastname}}</td>
-                <td>{{dpRequest.created * 1000 | date:'dd.MM.yyyy HH:mm'}}</td>
-                <td>{{dpRequest.modified * 1000 | date:'dd.MM.yyyy HH:mm'}}</td>
-            </tr>
-            </tbody>
-        </table>
--->
-

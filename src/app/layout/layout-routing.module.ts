@@ -27,7 +27,7 @@ const routes: Routes = [
             {
                 path: 'token',
                 loadChildren: './apayment-token/apayment-token.module#APaymentTokenModule',
-                canActivate: [AdminGuard]
+                // canActivate: [AdminGuard]
             },
             {path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
             {path: 'charts', loadChildren: './charts/charts.module#ChartsModule'},

@@ -17,7 +17,7 @@
 
         <!--APayment Token-->
         <a [routerLink]="['/token']" [routerLinkActive]="['router-link-active']"
-           *ngIf="authService.hasRole(['Admin'])" class="list-group-item">
+           *ngIf="authService.hasRole(['Admin', 'Canton'])" class="list-group-item">
             <i class="fa fa-fw fa-money"></i>&nbsp;Tokens
         </a>
 
