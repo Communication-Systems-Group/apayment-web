@@ -5,7 +5,6 @@ import {DPRequestService} from '../../../shared/services/dp-request.service';
 import {User} from '../../../shared/models/user.model';
 import {UserService} from '../../../shared/services/user.service';
 import {AuthenticationService} from '../../../shared/services/authentication.service';
-import {NotificationService} from 'ng2-notify-popup';
 
 @Component({
     selector: 'app-dprequest-detail',
@@ -24,8 +23,7 @@ export class DPRequestDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private dpRequestService: DPRequestService,
                 private userService: UserService,
-                private authService: AuthenticationService,
-                private notify: NotificationService) {
+                private authService: AuthenticationService) {
         this.header = [
             {
                 link: '/requests',
@@ -63,7 +61,7 @@ export class DPRequestDetailComponent implements OnInit {
             },
             error => {
                 this.error = error;
-                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
             }
         );
     }
@@ -72,10 +70,10 @@ export class DPRequestDetailComponent implements OnInit {
         this.dpRequestService.addInspector(this.dpRequest).subscribe(
             dpRequest => {
                 console.log('success');
-                this.notify.show('Inspector set', {type: 'success'});
+                // this.notify.show('Inspector set', {type: 'success'});
             },
             error => {
-                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
                 this.error = error;
             } // TODO: Display error message
         );
@@ -105,7 +103,7 @@ export class DPRequestDetailComponent implements OnInit {
                 }
             },
             error => {
-                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
                 this.error = error;
             }
         );
@@ -133,7 +131,7 @@ export class DPRequestDetailComponent implements OnInit {
                 }
             },
             error => {
-                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
                 this.error = error;
             }
         );

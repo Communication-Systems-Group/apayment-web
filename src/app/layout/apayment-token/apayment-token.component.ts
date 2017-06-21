@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../shared/services/user.service';
-import {NotificationService} from 'ng2-notify-popup';
 import {APaymentTokenService} from '../../shared/services/apayment-token.service';
 
 @Component({
@@ -11,11 +10,11 @@ import {APaymentTokenService} from '../../shared/services/apayment-token.service
 })
 export class APaymentTokenComponent implements OnInit {
 
-    model = {to: '', amount: 0};
+    model = {to: '', amount: 0, message: ''};
     users = [];
     transactions = [];
 
-    constructor(private userService: UserService, private notify: NotificationService, private apaymentTokenService: APaymentTokenService) {
+    constructor(private userService: UserService, private apaymentTokenService: APaymentTokenService) {
     }
 
     ngOnInit() {
@@ -29,7 +28,7 @@ export class APaymentTokenComponent implements OnInit {
                 this.users = users;
             },
             error => {
-                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
             }
         );
     }
@@ -40,7 +39,7 @@ export class APaymentTokenComponent implements OnInit {
                 this.transactions = transactions;
             },
             error => {
-                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
             }
         );
     }
@@ -48,11 +47,11 @@ export class APaymentTokenComponent implements OnInit {
     execTransfer() {
         this.apaymentTokenService.transfer(this.model).subscribe(
             result => {
-                this.model = {to: '', amount: 0};
-                this.notify.show('Transfer submitted. Once the transaction has been executed it will show up.', {type: 'success'});
+                this.model = {to: '', amount: 0, message: ''};
+                // this.notify.show('Transfer submitted. Once the transaction has been executed it will show up.', {type: 'success'});
             },
             error => {
-                this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
             }
         );
     }
