@@ -9,6 +9,8 @@ import {AuthGuard} from './guards/auth.guards';
 import {AuthenticationService} from './shared/services/authentication.service';
 import {AuthModule} from './shared/modules/auth/auth.module';
 import {GlobalErrorHandler} from './shared/services/global-error-handler';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SimpleNotificationsModule} from 'angular2-notifications';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import {GlobalErrorHandler} from './shared/services/global-error-handler';
         FormsModule,
         HttpModule,
         AppRoutingModule,
-        AuthModule
+        AuthModule,
+        BrowserAnimationsModule,
+        SimpleNotificationsModule.forRoot()
     ],
     providers: [
         {provide: ErrorHandler, useClass: GlobalErrorHandler},

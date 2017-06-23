@@ -6,7 +6,7 @@ export class User {
     firstname: string;
     lastname: string;
     email: string;
-
+    tvd: number;
     plant: Plant;
 
     constructor() {

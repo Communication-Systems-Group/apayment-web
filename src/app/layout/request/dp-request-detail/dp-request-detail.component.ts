@@ -5,13 +5,14 @@ import {DPRequestService} from '../../../shared/services/dp-request.service';
 import {User} from '../../../shared/models/user.model';
 import {UserService} from '../../../shared/services/user.service';
 import {AuthenticationService} from '../../../shared/services/authentication.service';
+import {NotificationsService} from 'angular2-notifications/dist';
 
 @Component({
-    selector: 'app-dprequest-detail',
-    templateUrl: './dp-request-detail.component.html',
-    styleUrls: ['./dp-request-detail.component.scss'],
-    providers: [UserService]
-})
+               selector: 'app-dprequest-detail',
+               templateUrl: './dp-request-detail.component.html',
+               styleUrls: ['./dp-request-detail.component.scss'],
+               providers: [UserService]
+           })
 
 export class DPRequestDetailComponent implements OnInit {
     dpRequest: DPRequest;
@@ -23,7 +24,8 @@ export class DPRequestDetailComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private dpRequestService: DPRequestService,
                 private userService: UserService,
-                private authService: AuthenticationService) {
+                private authService: AuthenticationService,
+                private notify: NotificationsService) {
         this.header = [
             {
                 link: '/requests',
@@ -40,9 +42,9 @@ export class DPRequestDetailComponent implements OnInit {
                     dpRequest => {
                         this.dpRequest = dpRequest;
                         this.header.push({
-                            link: '/requests/' + this.dpRequest.id,
-                            title: 'Request (' + this.dpRequest.id + ')'
-                        });
+                                             link: '/requests/' + this.dpRequest.id,
+                                             title: 'Request (' + this.dpRequest.id + ')'
+                                         });
                     },
                     error => this.error = error
                 );
@@ -61,7 +63,7 @@ export class DPRequestDetailComponent implements OnInit {
             },
             error => {
                 this.error = error;
-                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                this.notify.error('Service Error', error.statusText + ': ' + error._body, {});
             }
         );
     }
@@ -69,23 +71,13 @@ export class DPRequestDetailComponent implements OnInit {
     save(): void {
         this.dpRequestService.addInspector(this.dpRequest).subscribe(
             dpRequest => {
-                console.log('success');
-                // this.notify.show('Inspector set', {type: 'success'});
+                this.notify.success('Success', 'Inspector set', {});
             },
             error => {
-                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                this.notify.error('Service Error', error.statusText + ': ' + error._body, {});
                 this.error = error;
             } // TODO: Display error message
         );
-        // this.dpRequestService
-        // .create(this.dpRequest)
-        // .subscribe(
-        //     dpRequest => {
-        //         this.dpRequest = dpRequest; //
-        //         this.goBack(dpRequest);
-        //     },
-        //     error => this.error = error // TODO: Display error message
-        // );
     }
 
     goBack(savedDPRequest: DPRequest = null): void {
@@ -103,7 +95,7 @@ export class DPRequestDetailComponent implements OnInit {
                 }
             },
             error => {
-                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                this.notify.error('Service Error', error.statusText + ': ' + error._body, {});
                 this.error = error;
             }
         );
@@ -131,7 +123,7 @@ export class DPRequestDetailComponent implements OnInit {
                 }
             },
             error => {
-                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                this.notify.error('Service Error', error.statusText + ': ' + error._body, {});
                 this.error = error;
             }
         );

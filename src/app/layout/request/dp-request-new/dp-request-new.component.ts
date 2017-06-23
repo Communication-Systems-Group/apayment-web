@@ -4,13 +4,14 @@ import {Contribution} from '../../../shared/models/contribution.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {DPRequestService} from '../../../shared/services/dp-request.service';
 import {ContributionService} from '../../../shared/services/contribution.service';
+import {NotificationsService} from 'angular2-notifications/dist';
 
 
 @Component({
-    selector: 'app-dp-request-new',
-    templateUrl: './dp-request-new.component.html',
-    styleUrls: ['./dp-request-new.component.scss']
-})
+               selector: 'app-dp-request-new',
+               templateUrl: './dp-request-new.component.html',
+               styleUrls: ['./dp-request-new.component.scss']
+           })
 export class DpRequestNewComponent implements OnInit {
     @Input() dpRequest: DPRequest;
     @Output() close = new EventEmitter();
@@ -22,7 +23,8 @@ export class DpRequestNewComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private dpRequestService: DPRequestService,
-                private contributionService: ContributionService) {
+                private contributionService: ContributionService,
+                private notify: NotificationsService) {
     }
 
     ngOnInit() {
@@ -51,12 +53,13 @@ export class DpRequestNewComponent implements OnInit {
                     this.dpRequest.contributions.push(contribution);
                 },
                 error => {
-                    // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
+                    this.notify.error('Service Error', error.statusText + ': ' + error._body, {});
                     console.error(error);
                 }
             );
         } else {
-            const index = this.dpRequest.contributions.findIndex(contribution => contribution.id === contributionId);
+            const index = this.dpRequest.contributions.findIndex(
+                contribution => contribution.id === contributionId);
             this.dpRequest.contributions.splice(index, 1);
         }
     }
@@ -72,17 +75,17 @@ export class DpRequestNewComponent implements OnInit {
 
     save(): void {
         this.dpRequestService
-        .create(this.dpRequest)
-        .subscribe(
-            dpRequest => {
-                this.dpRequest = dpRequest; //
-                this.goBack(dpRequest);
-            },
-            error => {
-                // this.notify.show(error.statusText + ': ' + error._body, {type: 'error'});
-                this.error = error;
-            } // TODO: Display error message
-        );
+            .create(this.dpRequest)
+            .subscribe(
+                dpRequest => {
+                    this.dpRequest = dpRequest; //
+                    this.goBack(dpRequest);
+                },
+                error => {
+                    this.notify.error('Service Error', error.statusText + ': ' + error._body, {});
+                    this.error = error;
+                } // TODO: Display error message
+            );
         // this.close.emit(savedDPRequest);
     }
 
