@@ -121,11 +121,19 @@ export class DPRequestDetailComponent implements OnInit {
                 if (!this.authService.hasRole(['Farmer'])) {
                     this.getInspectors();
                 }
+                this.notify.success('Success', 'Payment sent. It will show up shortly..', {});
             },
             error => {
                 this.notify.error('Service Error', error.statusText + ': ' + error._body, {});
                 this.error = error;
             }
         );
+    }
+
+    byId(item1: User, item2: User) {
+        if (item1 && item1.id && item2 && item2.id) {
+            return item1.id === item2.id;
+        }
+        return false;
     }
 }

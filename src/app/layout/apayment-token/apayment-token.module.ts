@@ -4,6 +4,7 @@ import {PageHeaderModule} from '../../shared/modules/page-header/page-header.mod
 import {APaymentTokenComponent} from './apayment-token.component';
 import {APaymentTokenRoutingModule} from './apayment-token-routing.module';
 import {FormsModule} from '@angular/forms';
+import {SharedPipesModule} from '../../shared/pipes/shared-pipes.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {FormsModule} from '@angular/forms';
         CommonModule,
         FormsModule,
         APaymentTokenRoutingModule,
-        PageHeaderModule
+        PageHeaderModule,
+        SharedPipesModule
     ],
     declarations: [APaymentTokenComponent]
 })

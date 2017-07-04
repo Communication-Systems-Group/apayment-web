@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {ContributionService} from '../../shared/services/contribution.service';
 import {DpRequestNewComponent} from './dp-request-new/dp-request-new.component';
 import {DPRequestRoutingModule} from './dp-request-routing.module';
+import {SharedPipesModule} from '../../shared/pipes/shared-pipes.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {DPRequestRoutingModule} from './dp-request-routing.module';
         CommonModule,
         DPRequestRoutingModule,
         PageHeaderModule,
-        FormsModule
+        FormsModule,
+        SharedPipesModule
     ],
     providers: [DPRequestService, ContributionService],
     declarations: [DPRequestComponent, DPRequestDetailComponent, DpRequestNewComponent]

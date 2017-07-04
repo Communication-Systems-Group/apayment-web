@@ -1,6 +1,5 @@
 <app-page-header [headers]="header" [icon]="'fa-edit'"></app-page-header>
 <div *ngIf="dpRequest" class="col-sm-12">
-    {{inspection | json }}
     <div *ngFor="let contribution of dpRequest.contributions">
 
         <div *ngFor="let controlCategory of contribution.controlCategories">

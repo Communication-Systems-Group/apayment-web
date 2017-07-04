@@ -9,8 +9,39 @@ export class User {
     tvd: number;
     plant: Plant;
 
+    AnimalHusbandryDetailResult: AnimalHusbandryDetailResult;
+
     constructor() {
         this.plant = new Plant();
     }
 }
 
+
+export class AnimalHusbandryDetailResult {
+    PostData: PostData;
+
+    constructor(PostData: PostData) {
+        this.PostData = PostData;
+    }
+
+}
+
+export class PostData {
+    City: string;
+    Name: string;
+    PostCode: string;
+    Street: string;
+    TVDNumber: number;
+
+    constructor(City: string,
+                Name: string,
+                PostCode: string,
+                Street: string,
+                TVDNumber: number) {
+        this.City = City;
+        this.Name = Name;
+        this.PostCode = PostCode;
+        this.Street = Street;
+        this.TVDNumber = TVDNumber;
+    }
+}

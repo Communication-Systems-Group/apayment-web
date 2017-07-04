@@ -11,8 +11,8 @@
                 <label for="receiver">Receiver</label>
                 <select class="form-control" id="receiver" required [(ngModel)]="model.to"
                         name="receiver">
-                    <option *ngFor="let user of users" [value]="user.address">{{user.firstname}}
-                        {{user.lastname}}
+                    <option *ngFor="let user of users" [value]="user.etherumAddress">
+                        {{user | firstLastName }}
                     </option>
                 </select>
             </div>
@@ -51,8 +51,8 @@
             <tbody>
             <tr *ngFor="let transaction of transactions">
                 <td>{{transaction.timestamp * 1000 | date:'dd.MM.yyyy HH:mm'}}</td>
-                <td>{{transaction.from.firstname}} {{transaction.from.lastname}}</td>
-                <td>{{transaction.to.firstname}} {{transaction.to.lastname}}</td>
+                <td>{{transaction.from | firstLastName}}</td>
+                <td>{{transaction.to | firstLastName}}</td>
                 <td>{{transaction.amount}}</td>
                 <td>{{transaction.message}}</td>
                 <td>

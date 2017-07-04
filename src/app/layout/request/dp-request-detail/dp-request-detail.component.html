@@ -16,7 +16,7 @@
             </address>
 
             <address>
-                <strong>{{dpRequest.user?.firstname}} {{dpRequest.user?.lastname}}</strong><br>
+                <strong>{{dpRequest.user | firstLastName }}</strong><br>
                 <a href="mailto:#">first.last@example.com</a>
             </address>
         </div>
@@ -46,16 +46,17 @@
             </div>
             <div *ngIf="authService.hasRole(['Canton', 'Admin'])">
                 <div class="form-group">
-                    <select class="form-control" [(ngModel)]="dpRequest.inspector">
-                        <option *ngFor="let inspector of inspectors" [ngValue]="inspector"
-                                [selected]="inspector.id === dpRequest.inspector?.id">
-                            {{inspector.firstname}} {{inspector.lastname}}
+                    <select class="form-control" [(ngModel)]="dpRequest.inspector"
+                            [compareWith]="byId">
+                        <option *ngFor="let inspector of inspectors" [ngValue]="inspector">
+                            {{inspector | firstLastName}}
                         </option>
                     </select>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="card mb-3" *ngIf="dpRequest.contributionsWithLacks.length > 0">
         <div class="card-header">

@@ -18,7 +18,7 @@
 
                     <div class="form-group"
                          [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-                        <input type="text" class="form-control input-underline input-lg"
+                        <input type="password" class="form-control input-underline input-lg"
                                name="password" placeholder="Password" [(ngModel)]="model.password"
                                #password="ngModel" required/>
                         <div *ngIf="f.submitted && !password.valid" class="help-block">Password is
@@ -29,7 +29,7 @@
                 </div>
                 <button type="submit" class="btn rounded-btn" [disabled]="!f.form.valid">Login</button>
                 &nbsp;
-                <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
+                <!--<a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>-->
             </form>
         </div>
     </div>
