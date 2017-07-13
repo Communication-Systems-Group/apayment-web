@@ -7,6 +7,7 @@ import {InspectionDetailComponent} from './inspection-detail/inspection-detail.c
 import {DPRequestService} from '../../shared/services/dp-request.service';
 import {LackSelectionComponent} from './inspection-detail/lack-selection/lack-selection.component';
 import {FormsModule} from '@angular/forms';
+import {AccordionModule} from 'ngx-bootstrap/accordion';
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import {FormsModule} from '@angular/forms';
         FormsModule,
         InspectionRoutingModule,
         PageHeaderModule,
+        AccordionModule.forRoot()
     ],
     declarations: [InspectionComponent, InspectionDetailComponent, LackSelectionComponent],
     providers: [DPRequestService]

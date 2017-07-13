@@ -46,9 +46,7 @@ export class InspectionDetailComponent implements OnInit {
         });
     }
 
-
     onLackSelected(contributionCode: number, controlCategoryId: string, pointGroupCode: number, controlPointId: string, lack: Lack) {
-
         const index = this.inspection.lacks.map(function (e) {
             return e.contributionCode + e.controlCategoryId + e.pointGroupCode + e.controlPointId;
         }).indexOf(contributionCode + controlCategoryId + pointGroupCode + controlPointId);

@@ -1,42 +1,76 @@
 <app-page-header [headers]="header" [icon]="'fa-edit'"></app-page-header>
 <div *ngIf="dpRequest" class="col-sm-12">
+
     <div *ngFor="let contribution of dpRequest.contributions">
+        <accordion>
+            <accordion-group *ngFor="let controlCategory of contribution.controlCategories"
+                             [heading]="controlCategory.abbreviation">
+                <accordion [closeOthers]="true">
+                    <accordion-group *ngFor="let pointGroup of controlCategory.pointGroups"
+                                     [heading]="pointGroup.abbreviation">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                            <tr class="row">
+                                <th class="col-sm-1">ID</th>
+                                <th class="col-sm-2">Abbreviation</th>
+                                <th class="col-sm-4">Control Point</th>
+                                <th class="col-sm-5">Lack</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let controlPoint of pointGroup.controlPoints" class="row">
+                                <td class="col-sm-1">{{controlPoint.controlPointId}}</td>
+                                <td class="col-sm-2">{{controlPoint.abbreviation}}</td>
+                                <td class="col-sm-4 line-breaker">{{controlPoint.controlPoint}}</td>
 
-        <div *ngFor="let controlCategory of contribution.controlCategories">
-            <h4>{{controlCategory.abbreviation}}</h4>
+                                <td class="col-sm-5">
+                                    <app-lack-selection [lacks]="controlPoint.lacks"
+                                                        (onLackSelected)="onLackSelected(contribution.code, controlCategory.id, pointGroup.pointGroupCode, controlPoint.id, $event)"></app-lack-selection>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </accordion-group>
+                </accordion>
+            </accordion-group>
+        </accordion>
 
 
-            <div class="card mb-3" *ngFor="let pointGroup of controlCategory.pointGroups">
-                <div class="card-header">{{pointGroup.pointGroupId}} - {{pointGroup.abbreviation}}
-                </div>
-                <div class="card-block table-responsive">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                        <tr class="row">
-                            <th class="col-sm-1">ID</th>
-                            <th class="col-sm-2">Abbreviation</th>
-                            <th class="col-sm-4">Control Point</th>
-                            <th class="col-sm-5">Lack</th>
+        <!--<div *ngFor="let controlCategory of contribution.controlCategories">-->
 
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let controlPoint of pointGroup.controlPoints" class="row">
-                            <td class="col-sm-1">{{controlPoint.controlPointId}}</td>
-                            <td class="col-sm-2">{{controlPoint.abbreviation}}</td>
-                            <td class="col-sm-4 line-breaker">{{controlPoint.controlPoint}}</td>
+        <!--<h4>{{controlCategory.abbreviation}}-->
+        <!--<i class="fa fa-minus-square pull-right" aria-hidden="true"></i>-->
+        <!--</h4>-->
+        <!--<div class="card mb-3" *ngFor="let pointGroup of controlCategory.pointGroups">-->
+        <!--<div class="card-header">{{pointGroup.pointGroupId}} - {{pointGroup.abbreviation}}-->
+        <!--</div>-->
+        <!--<div class="card-block table-responsive">-->
+        <!--<table class="table table-hover table-striped">-->
+        <!--<thead>-->
+        <!--<tr class="row">-->
+        <!--<th class="col-sm-1">ID</th>-->
+        <!--<th class="col-sm-2">Abbreviation</th>-->
+        <!--<th class="col-sm-4">Control Point</th>-->
+        <!--<th class="col-sm-5">Lack</th>-->
 
-                            <td class="col-sm-5">
-                                <app-lack-selection [lacks]="controlPoint.lacks"
-                                                    (onLackSelected)="onLackSelected(contribution.code, controlCategory.controlCategoryId, pointGroup.pointGroupCode, controlPoint.controlPointId, $event)"></app-lack-selection>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr *ngFor="let controlPoint of pointGroup.controlPoints" class="row">-->
+        <!--<td class="col-sm-1">{{controlPoint.controlPointId}}</td>-->
+        <!--<td class="col-sm-2">{{controlPoint.abbreviation}}</td>-->
+        <!--<td class="col-sm-4 line-breaker">{{controlPoint.controlPoint}}</td>-->
 
-        </div>
+        <!--<td class="col-sm-5">-->
+        <!--<app-lack-selection [lacks]="controlPoint.lacks"-->
+        <!--(onLackSelected)="onLackSelected(contribution.code, controlCategory.id, pointGroup.pointGroupCode, controlPoint.id, $event)"></app-lack-selection>-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
     </div>
     <button type="button" class="btn btn-primary" (click)="submitInspection()">Submit Inspection
     </button>
