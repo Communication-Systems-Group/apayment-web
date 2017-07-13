@@ -12,18 +12,18 @@
                             <thead>
                             <tr class="row">
                                 <th class="col-sm-1">ID</th>
-                                <th class="col-sm-2">Abbreviation</th>
-                                <th class="col-sm-4">Control Point</th>
-                                <th class="col-sm-5">Lack</th>
+                                <th class="col-sm-5">Control Point</th>
+                                <th class="col-sm-6">Lack</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr *ngFor="let controlPoint of pointGroup.controlPoints" class="row">
                                 <td class="col-sm-1">{{controlPoint.controlPointId}}</td>
-                                <td class="col-sm-2">{{controlPoint.abbreviation}}</td>
-                                <td class="col-sm-4 line-breaker">{{controlPoint.controlPoint}}</td>
-
-                                <td class="col-sm-5">
+                                <td class="col-sm-5">{{controlPoint.abbreviation}}<i
+                                    class="fa fa-info-circle" aria-hidden="true"
+                                    tooltip="{{controlPoint.controlPoint}}" placement="bottom"></i>
+                                </td>
+                                <td class="col-sm-6">
                                     <app-lack-selection [lacks]="controlPoint.lacks"
                                                         (onLackSelected)="onLackSelected(contribution.code, controlCategory.id, pointGroup.pointGroupCode, controlPoint.id, $event)"></app-lack-selection>
                                 </td>
