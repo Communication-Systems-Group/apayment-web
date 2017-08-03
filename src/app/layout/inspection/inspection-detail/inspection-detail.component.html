@@ -13,13 +13,13 @@
                             <tr class="row">
                                 <th class="col-sm-1">ID</th>
                                 <th class="col-sm-5">Control Point</th>
-                                <th class="col-sm-6">Lack</th>
+                                <th class="col-sm-6">Issue</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr *ngFor="let controlPoint of pointGroup.controlPoints" class="row">
                                 <td class="col-sm-1">{{controlPoint.controlPointId}}</td>
-                                <td class="col-sm-5">{{controlPoint.abbreviation}}<i
+                                <td class="col-sm-5">{{controlPoint.abbreviation}} <i
                                     class="fa fa-info-circle" aria-hidden="true"
                                     tooltip="{{controlPoint.controlPoint}}" placement="bottom"></i>
                                 </td>

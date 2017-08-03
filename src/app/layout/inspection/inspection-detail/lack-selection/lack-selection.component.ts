@@ -15,6 +15,12 @@ export class LackSelectionComponent implements OnInit {
     }
 
     ngOnInit() {
+        for (let i = 0; i < this.lacks.length; i++) {
+            if (this.lacks[i].computed === true) {
+                this.selectedLack = this.lacks[i];
+                this.onChange(this.selectedLack)
+            }
+        }
     }
 
     onChange(lack: Lack) {

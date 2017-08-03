@@ -1,6 +1,6 @@
 <app-page-header [heading]="'Requests'" [icon]="'fa-edit'"></app-page-header>
 
-<p>
+<p *ngIf="!addingDpRequest">
     <button type="button" class="btn btn-primary" (click)="addRequest()">New Request</button>
 </p>
 

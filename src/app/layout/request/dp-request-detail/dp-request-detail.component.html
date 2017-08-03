@@ -8,16 +8,15 @@
             Created: {{dpRequest.created * 1000 | date:'dd.MM.yyyy HH:mm'}}
         </div>
         <div class="card-block table-responsive">
-            <address>
-                <strong>Twitter, Inc.</strong><br>
-                1355 Market Street, Suite 900<br>
-                San Francisco, CA 94103<br>
-                <abbr title="Phone">P:</abbr> (123) 456-7890
+            <address *ngIf="dpRequest.user.agateDetails">
+                {{dpRequest.user.agateDetails.title}} <strong>{{dpRequest.user | firstLastName }}</strong><br>
+                {{dpRequest.user.agateDetails.postAddress.street}}<br>
+                {{dpRequest.user.agateDetails.postAddress.postCode}} {{dpRequest.user.agateDetails.postAddress.city}}<br>
+                <a href="mailto:#">{{dpRequest.user.agateDetails.postAddress.emailAddress}}</a><br>
+                <abbr title="Phone">P:</abbr> {{dpRequest.user.agateDetails.postAddress.phoneNumbers.stringItem[0]}}
             </address>
-
-            <address>
-                <strong>{{dpRequest.user | firstLastName }}</strong><br>
-                <a href="mailto:#">first.last@example.com</a>
+            <address *ngIf="!dpRequest.user.agateDetails">
+                TVD not available
             </address>
         </div>
     </div>
@@ -60,7 +59,7 @@
 
     <div class="card mb-3" *ngIf="dpRequest.contributionsWithLacks.length > 0">
         <div class="card-header">
-            <h4>Inspection Lacks</h4>
+            <h4>Inspection Issues</h4>
         </div>
         <div class="card-block table-responsive">
             <div *ngFor="let contribution of dpRequest.contributionsWithLacks" class="card mb-3">
