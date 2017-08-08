@@ -147,9 +147,6 @@
                 <button class="btn btn-danger" (click)="pay()"
                         *ngIf="dpRequest.payments.length == 1">2. Payment (1. July)
                 </button>
-                <button class="btn btn-danger" (click)="pay()"
-                        *ngIf="dpRequest.payments.length == 2">3. Payment (31. December)
-                </button>
             </div>
             <div class="row" *ngFor="let payment of dpRequest.payments">
                 <div class="col-sm-2">{{payment.timestamp * 1000 | date:'dd.MM.yyyy HH:mm'}}</div>
