@@ -1,6 +1,5 @@
 <app-page-header [headers]="header" [icon]="'fa-edit'"></app-page-header>
 <div *ngIf="dpRequest" class="col-sm-12">
-
     <div *ngFor="let contribution of dpRequest.contributions">
         <accordion>
             <accordion-group *ngFor="let controlCategory of contribution.controlCategories"
