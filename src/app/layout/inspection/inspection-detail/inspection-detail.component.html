@@ -1,4 +1,11 @@
 <app-page-header [headers]="header" [icon]="'fa-edit'"></app-page-header>
+
+<div class="loading">
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+</div>
 <div *ngIf="dpRequest" class="col-sm-12">
     <div *ngFor="let contribution of dpRequest.contributions">
         <accordion>

@@ -11,17 +11,17 @@ export class DashboardComponent implements OnInit {
 
     constructor() {
         this.sliders.push({
-                              imagePath: 'assets/images/slider1.jpg',
-                              label: 'First slide label',
-                              text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+                              imagePath: 'assets/images/newslider1.jpeg',
+                              label: 'Direktzahlungen',
+                              text: 'Easy to request Direktzahlungen.'
                           }, {
-                              imagePath: 'assets/images/slider2.jpg',
-                              label: 'Second slide label',
-                              text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                              imagePath: 'assets/images/newslider2.jpeg',
+                              label: 'Inspection',
+                              text: 'Automated generated checklists for inspections'
                           }, {
-                              imagePath: 'assets/images/slider3.jpg',
-                              label: 'Third slide label',
-                              text: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
+                              imagePath: 'assets/images/newslider3.jpg',
+                              label: 'Payment',
+                              text: 'Receive payments through DP-tokens'
                           });
 
         this.alerts.push({

@@ -28,6 +28,11 @@ const routes: Routes = [
                 path: 'token',
                 loadChildren: './apayment-token/apayment-token.module#APaymentTokenModule',
                 // canActivate: [AdminGuard]
+            },
+            {
+                path: 'profile',
+                loadChildren: './profile/profile.module#ProfileModule',
+                // canActivate: [AdminGuard]
             }
         ]
     }
